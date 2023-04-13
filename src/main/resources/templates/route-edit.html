@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Route</title>
+</head>
+<body>
+<h1>Edit Route</h1>
+<h3 th:if="${message != null}" th:text="${message}">Message</h3>
+<form th:action="@{/route}" th:object="${entity}" method="post">
+
+    <p>
+        <label for="parcel">parcel:</label>
+            <input type="text" th:field="*{parcel}" id="parcel" required>
+        </p>
+    <p>
+        <label for="locations">locations:</label>
+            <input type="text" th:field="*{locations}" id="locations" required>
+        </p>
+    <p>
+        <label for="dateTime">dateTime:</label>
+            <input type="text" th:field="*{dateTime}" id="dateTime" required>
+        </p>
+
+    <p>
+        <input type="text" th:field="*{id}" id="id">
+        <input type="submit" value="Save">
+        <a th:href="@{/route}">Cancel</a>
+    </p>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List of User</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1>List of User</h1>
+<h3 th:if="${message != null}" th:text="${message}">Message</h3>
+<a th:href="@{/user/edit}">Create new User</a>
+<table>
+    <thead>
+    <tr>
+        <th>username</th>
+        <th>password</th>
+        <th>firstname</th>
+        <th>lastname</th>
+        <th>passportNumber</th>
+        <th>phoneNumber</th>
+        <th>address</th>
+        <th>location</th>
+        <th>role</th>
+        <th>sendedParcel</th>
+        <th>receivedParcel</th>
+
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr th:each="entity : ${list}">
+                                    <td th:text=${entity.username}></td>
+                                            <td th:text=${entity.password}></td>
+                                            <td th:text=${entity.firstname}></td>
+                                            <td th:text=${entity.lastname}></td>
+                                            <td th:text=${entity.passportNumber}></td>
+                                            <td th:text=${entity.phoneNumber}></td>
+                                            <td th:text=${entity.address}></td>
+                                            <td th:text=${entity.location}></td>
+                                            <td th:text=${entity.role}></td>
+                                            <td>
+                    <ul>
+                        <li th:each="sendedParcel_item : ${entity.sendedParcel}" th:text="${sendedParcel_item}"></li>
+                    </ul>
+                </td>
+                                            <td>
+                    <ul>
+                        <li th:each="receivedParcel_item : ${entity.receivedParcel}" th:text="${receivedParcel_item}"></li>
+                    </ul>
+                </td>
+                
+        <td>
+            <a th:href="@{/user/{id}(id=${entity.id})}">See detail</a>
+            <a th:href="@{/user/edit/{id}(id=${entity.id})}">Edit</a>
+            <form th:if="${entity.id!=null}" method="get"
+                  th:action="'/user/'
+                  +${entity.id}+'/delete'">
+                <input type="submit" value="Delete" onclick="return confirm('Are you sure?')">
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

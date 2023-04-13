@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List of Parcel</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1>List of Parcel</h1>
+<h3 th:if="${message != null}" th:text="${message}">Message</h3>
+<a th:href="@{/parcel/edit}">Create new Parcel</a>
+<table>
+    <thead>
+    <tr>
+        <th>sender</th>
+        <th>recipient</th>
+        <th>weight</th>
+        <th>cost</th>
+        <th>dispatchDate</th>
+        <th>deliveryDate</th>
+        <th>trackingStatuses</th>
+        <th>routes</th>
+
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr th:each="entity : ${list}">
+                                    <td th:text=${entity.sender}></td>
+                                            <td th:text=${entity.recipient}></td>
+                                            <td th:text=${entity.weight}></td>
+                                            <td th:text=${entity.cost}></td>
+                                            <td th:text=${entity.dispatchDate}></td>
+                                            <td th:text=${entity.deliveryDate}></td>
+                                            <td>
+                    <ul>
+                        <li th:each="trackingStatuses_item : ${entity.trackingStatuses}" th:text="${trackingStatuses_item}"></li>
+                    </ul>
+                </td>
+                                            <td>
+                    <ul>
+                        <li th:each="routes_item : ${entity.routes}" th:text="${routes_item}"></li>
+                    </ul>
+                </td>
+                
+        <td>
+            <a th:href="@{/parcel/{id}(id=${entity.id})}">See detail</a>
+            <a th:href="@{/parcel/edit/{id}(id=${entity.id})}">Edit</a>
+            <form th:if="${entity.id!=null}" method="get"
+                  th:action="'/parcel/'
+                  +${entity.id}+'/delete'">
+                <input type="submit" value="Delete" onclick="return confirm('Are you sure?')">
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

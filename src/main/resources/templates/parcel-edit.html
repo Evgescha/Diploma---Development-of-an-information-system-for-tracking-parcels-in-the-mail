@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Parcel</title>
+</head>
+<body>
+<h1>Edit Parcel</h1>
+<h3 th:if="${message != null}" th:text="${message}">Message</h3>
+<form th:action="@{/parcel}" th:object="${entity}" method="post">
+
+    <p>
+        <label for="sender">sender:</label>
+            <input type="text" th:field="*{sender}" id="sender" required>
+        </p>
+    <p>
+        <label for="recipient">recipient:</label>
+            <input type="text" th:field="*{recipient}" id="recipient" required>
+        </p>
+    <p>
+        <label for="weight">weight:</label>
+            <input type="text" th:field="*{weight}" id="weight" required>
+        </p>
+    <p>
+        <label for="cost">cost:</label>
+            <input type="text" th:field="*{cost}" id="cost" required>
+        </p>
+    <p>
+        <label for="dispatchDate">dispatchDate:</label>
+            <input type="text" th:field="*{dispatchDate}" id="dispatchDate" required>
+        </p>
+    <p>
+        <label for="deliveryDate">deliveryDate:</label>
+            <input type="text" th:field="*{deliveryDate}" id="deliveryDate" required>
+        </p>
+    <p>
+        <label for="trackingStatuses">trackingStatuses:</label>
+            <select multiple="multiple" th:field="*{trackingStatuses}" id="trackingStatuses">
+            <option th:each="trackingStatuses_item : ${trackingStatuses_list}" th:value="${trackingStatuses_item}" th:text="${trackingStatuses_item}"></option>
+        </select>
+        </p>
+    <p>
+        <label for="routes">routes:</label>
+            <select multiple="multiple" th:field="*{routes}" id="routes">
+            <option th:each="routes_item : ${routes_list}" th:value="${routes_item}" th:text="${routes_item}"></option>
+        </select>
+        </p>
+
+    <p>
+        <input type="text" th:field="*{id}" id="id">
+        <input type="submit" value="Save">
+        <a th:href="@{/parcel}">Cancel</a>
+    </p>
+</form>
+
+</body>
+</html>

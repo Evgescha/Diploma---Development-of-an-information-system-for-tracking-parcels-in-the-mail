@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Location</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1>Location Details</h1>
+<h3 th:if="${message!=null}" th:text="${message}">Message</h3>
+<table>
+        <tr>
+        <th>address:</th>
+                <td th:text="${entity.address}"></td>
+            </tr>
+        <tr>
+        <th>latitude:</th>
+                <td th:text="${entity.latitude}"></td>
+            </tr>
+        <tr>
+        <th>longitude:</th>
+                <td th:text="${entity.longitude}"></td>
+            </tr>
+        <tr>
+        <th>contactInfo:</th>
+                <td th:text="${entity.contactInfo}"></td>
+            </tr>
+        <tr>
+        <th>users:</th>
+                <td>
+            <ul>
+                <li th:each="users_item : ${entity.users}" th:text="${users_item}"></li>
+            </ul>
+        </td>
+            </tr>
+    
+
+</table>
+<br>
+<a th:href="@{/location}">Back to the List</a>
+<a th:href="@{/location/edit/{id}(id=${entity.id})}">Edit</a>
+<form th:if="${entity.id!=null}" method="get"
+         th:action="'/location/'
+               + ${entity.id} + '/delete'">
+    <input type="submit" value="Delete" onclick="return confirm('Are you sure?')">
+</form>
+</body>
+</html>
