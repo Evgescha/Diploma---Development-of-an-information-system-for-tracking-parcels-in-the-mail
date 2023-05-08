@@ -3,11 +3,14 @@ package com.hescha.mailtracking.model;
 import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -22,8 +25,8 @@ public class User extends AbstractEntity {
     private String address;
     @ManyToOne
     private Location location;
-    @ManyToOne
-    private Role role;
+    @ManyToMany
+    private Set<Role> roles = new HashSet<>();
     @OneToMany(mappedBy = "sender")
     private List<Parcel> sendedParcel = new ArrayList<>();
     @OneToMany(mappedBy = "recipient")

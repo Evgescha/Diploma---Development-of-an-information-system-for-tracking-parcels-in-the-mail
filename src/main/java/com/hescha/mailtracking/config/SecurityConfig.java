@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/h2", "/h2/**", "/css/**", "/js/**", "/img/**", "/lib/**",
-                        "/about","/404","/contact","/feature", "/product","/product/*","/testimonial",
+                        "/about","/contact","/service", "/single",
                         "/register", "/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/search", "/register", "/login", "/contact").permitAll()
                 .anyRequest().authenticated()

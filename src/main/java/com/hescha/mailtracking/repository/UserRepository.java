@@ -40,8 +40,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     User findByLocation(Location location);
 
-    User findByRole(Role role);
-
     List<User> findBySendedParcelContains(com.hescha.mailtracking.model.Parcel sendedParcel);
 
     List<User> findByReceivedParcelContains(com.hescha.mailtracking.model.Parcel receivedParcel);

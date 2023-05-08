@@ -4,8 +4,10 @@ import com.hescha.mailtracking.model.Location;
 import com.hescha.mailtracking.model.Role;
 import com.hescha.mailtracking.model.User;
 import com.hescha.mailtracking.repository.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +15,10 @@ import java.util.List;
 @Service
 public class UserService extends CrudService<User>  implements org.springframework.security.core.userdetails.UserDetailsService {
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private RoleService roleService;
     private final UserRepository repository;
 
     public UserService(UserRepository repository) {
@@ -90,10 +96,6 @@ public class UserService extends CrudService<User>  implements org.springframewo
         return repository.findByLocation(location);
     }
 
-    public User findByRole(Role role) {
-        return repository.findByRole(role);
-    }
-
     public List<User> findBySendedParcelContains(com.hescha.mailtracking.model.Parcel sendedParcel) {
         return repository.findBySendedParcelContains(sendedParcel);
     }
@@ -115,15 +117,31 @@ public class UserService extends CrudService<User>  implements org.springframewo
 
     private void updateFields(User entity, User read) {
         read.setUsername(entity.getUsername());
-        read.setPassword(entity.getPassword());
+        read.setPassword(passwordEncoder.encode(entity.getPassword()));
         read.setFirstname(entity.getFirstname());
         read.setLastname(entity.getLastname());
         read.setPassportNumber(entity.getPassportNumber());
         read.setPhoneNumber(entity.getPhoneNumber());
         read.setAddress(entity.getAddress());
         read.setLocation(entity.getLocation());
-        read.setRole(entity.getRole());
+        read.setRoles(entity.getRoles());
         read.setSendedParcel(entity.getSendedParcel());
         read.setReceivedParcel(entity.getReceivedParcel());
+    }
+
+    public boolean registerNew(User entity) {
+        Role read = roleService.read(1);
+        entity.getRoles().add(read);
+        if (repository.findByUsername(entity.getUsername()) != null) {
+            return false;
+        }
+        entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+        try {
+            create(entity);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
