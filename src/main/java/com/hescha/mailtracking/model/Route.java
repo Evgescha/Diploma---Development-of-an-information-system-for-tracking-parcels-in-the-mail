@@ -1,6 +1,7 @@
 package com.hescha.mailtracking.model;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -13,5 +14,6 @@ public class Route extends AbstractEntity {
     private Parcel parcel;
     @ManyToOne
     private Location locations;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime dateTime = LocalDateTime.now();
 }

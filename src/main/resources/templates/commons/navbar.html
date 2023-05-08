@@ -23,18 +23,22 @@
 
                 <a href="/user/profile" class="nav-item nav-link"
                    th:if="${#request.userPrincipal != null and !#request.isUserInRole('ADMIN') }">Profile</a>
-                <a href="/user" class="nav-item nav-link"
-                   th:if="${#request.isUserInRole('ADMIN') }">Users</a>
-                <a href="/login" class="nav-item nav-link"
-                   th:if="${#request.userPrincipal == null}">Login</a>
-                <a href="/logout" class="nav-item nav-link"
-                   th:if="${#request.userPrincipal != null}">Logout</a>
+
 
 
 
                 <a href="/location" class="nav-item nav-link">location</a>
                 <a href="/parcel" class="nav-item nav-link">parcel</a>
                 <a href="/route" class="nav-item nav-link">route</a>
+
+
+                <a href="/user" class="nav-item nav-link"
+                   th:if="${#request.isUserInRole('ADMIN') }">Users</a>
+                
+                <a href="/login" class="nav-item nav-link"
+                   th:if="${#request.userPrincipal == null}">Login</a>
+                <a href="/logout" class="nav-item nav-link"
+                   th:if="${#request.userPrincipal != null}">Logout</a>
             </div>
         </div>
     </nav>

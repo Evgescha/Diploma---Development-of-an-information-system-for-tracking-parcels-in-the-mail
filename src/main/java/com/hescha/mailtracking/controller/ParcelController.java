@@ -53,9 +53,8 @@ public class ParcelController {
             model.addAttribute("entity", service.read(id));
         }
 
-        model.addAttribute("user_list", userService.readAll());
-        model.addAttribute("trackingStatus_list", ParcelStatus.values());
-        model.addAttribute("route_list", routeService.readAll());
+        model.addAttribute("users", userService.readAll());
+        model.addAttribute("routes", routeService.readAll());
 
         return THYMELEAF_TEMPLATE_EDIT_PAGE;
     }

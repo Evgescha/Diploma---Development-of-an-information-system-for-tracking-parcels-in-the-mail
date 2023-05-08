@@ -26,6 +26,7 @@
                         <th>cost</th>
                         <th>dispatchDate</th>
                         <th>deliveryDate</th>
+                        <th>delivery address</th>
                         <th>routes</th>
                         <th>Action</th>
                     </tr>
@@ -38,12 +39,18 @@
                         <td th:text=${entity.cost}></td>
                         <td th:text=${entity.dispatchDate}></td>
                         <td th:text=${entity.deliveryDate}></td>
+                        <td th:text=${entity.recipient.address}></td>
                         <td>
                             <ul>
-                                <li th:each="routes_item : ${entity.routes}" th:text="${routes_item}"></li>
+                                <li th:each="routes_item : ${entity.routes}" th:text="${routes_item.locations}"></li>
                             </ul>
                         </td>
-                        <td>
+                        <td style="
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;
+                            ">
                             <a class="btn btn-secondary btn-sm" th:href="@{/parcel/{id}(id=${entity.id})}">See detail</a>
                             <a class="btn btn-primary btn-sm" th:href="@{/parcel/edit/{id}(id=${entity.id})}">Edit</a>
                             <form th:if="${entity.id!=null}" method="get" th:action="'/parcel/' +${entity.id}+'/delete'" class="d-inline">

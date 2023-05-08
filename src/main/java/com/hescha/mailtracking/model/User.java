@@ -29,4 +29,9 @@ public class User extends AbstractEntity {
     private List<Parcel> sendedParcel = new ArrayList<>();
     @OneToMany(mappedBy = "recipient")
     private List<Parcel> receivedParcel = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return passportNumber + "-" + firstname + "-" + lastname;
+    }
 }

@@ -19,14 +19,17 @@
                 <div class="contact-form bg-secondary" style="padding: 30px;">
                     <div id="success"></div>
                     <form th:action="@{/parcel}" th:object="${entity}" method="post" name="sentMessage" id="parcelForm" novalidate="novalidate">
-                        <div class="control-group">
-                            <label class="info-title" for="sender">Sender <span>*</span></label>
-                            <input type="text" class="form-control border-0 p-4" th:field="*{sender}" id="sender" placeholder="Sender" required="required" data-validation-required-message="Please enter the sender"/>
-                            <p class="help-block text-danger"></p>
+                        <div class="form-group">
+                            <label class="info-title" for="roles">Sender <span>*</span></label>
+                            <select th:field="*{sender}" id="roles" class="form-control unicase-form-control text-input" style="min-height: 100px">
+                                <option th:each="item : ${users}" th:value="${item.id}" th:text="${item}"></option>
+                            </select>
                         </div>
                         <div class="control-group">
                             <label class="info-title" for="recipient">Recipient <span>*</span></label>
-                            <input type="text" class="form-control border-0 p-4" th:field="*{recipient}" id="recipient" placeholder="Recipient" required="required" data-validation-required-message="Please enter the recipient"/>
+                            <select th:field="*{recipient}" id="recipient" class="form-control unicase-form-control text-input" style="min-height: 100px">
+                                <option th:each="item : ${users}" th:value="${item.id}" th:text="${item}"></option>
+                            </select>
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="control-group">
@@ -45,17 +48,23 @@
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="control-group">
-                            <label class="info-title" for="deliveryDate">Delivery Date <span>*</span></label>
-                            <input type="date" class="form-control border-0 p-4" th:field="*{deliveryDate}" id="deliveryDate" placeholder="Delivery Date" required="required" data-validation-required-message="Please enter the delivery date"/>
+                            <label class="info-title" for="deliveryDate">Delivery Date</label>
+                            <input type="date" class="form-control border-0 p-4" th:field="*{deliveryDate}" id="deliveryDate" placeholder="Delivery Date" data-validation-required-message="Please enter the delivery date"/>
                             <p class="help-block text-danger"></p>
                         </div>
-                        <div class="control-group">
+                        <div class="control-group" hidden>
                             <label for="routes" class="font-weight-bold">Routes:</label>
                             <select multiple="multiple" class="form-control border-0 p-4" th:field="*{routes}" id="routes">
-                                <option th:each="routes_item : ${routes_list}" th:value="${routes_item}"
+                                <option th:each="routes_item : ${entity.routes}" th:value="${routes_item}"
                                         th:text="${routes_item}"></option>
                             </select>
                             <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="form-group">
+                            <label class="info-title" for="status">Status <span>*</span></label>
+                            <select th:field="*{status}" id="status" class="form-control unicase-form-control text-input" style="min-height: 100px">
+                                <option th:each="item : ${T(com.hescha.mailtracking.model.ParcelStatus).values()}" th:value="${item}" th:text="${item}"></option>
+                            </select>
                         </div>
                         <div>
                             <input type="text" class="d-none" th:field="*{id}" id="id">
