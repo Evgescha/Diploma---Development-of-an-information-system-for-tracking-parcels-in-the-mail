@@ -4,6 +4,7 @@ import com.hescha.mailtracking.model.User;
 import com.hescha.mailtracking.service.LocationService;
 import com.hescha.mailtracking.service.ParcelService;
 import com.hescha.mailtracking.service.RoleService;
+import com.hescha.mailtracking.service.SecurityService;
 import com.hescha.mailtracking.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,10 +30,10 @@ public class UserController {
     public static final String REDIRECT_TO_ALL_ITEMS = "redirect:" + CURRENT_ADDRESS;
 
     private final UserService service;
-
     private final LocationService locationService;
     private final RoleService roleService;
     private final ParcelService parcelService;
+    private final SecurityService securityService;
 
     @GetMapping
     public String readAll(Model model) {
@@ -44,6 +45,11 @@ public class UserController {
     public String read(@PathVariable("id") Long id, Model model) {
         model.addAttribute("entity", service.read(id));
         return THYMELEAF_TEMPLATE_ONE_ITEM_PAGE;
+    }
+
+    @GetMapping("/profile")
+    public String profile() {
+        return "redirect:/user/" + securityService.getLoggedIn().getId();
     }
 
     @GetMapping(path = {"/edit", "/edit/{id}"})

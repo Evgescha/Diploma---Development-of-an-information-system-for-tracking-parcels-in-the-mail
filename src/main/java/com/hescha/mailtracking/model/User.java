@@ -34,4 +34,8 @@ public class User extends AbstractEntity {
     public String toString() {
         return passportNumber + "-" + firstname + "-" + lastname;
     }
+
+    public String fullName(){
+        return firstname +" "+ lastname;
+    }
 }

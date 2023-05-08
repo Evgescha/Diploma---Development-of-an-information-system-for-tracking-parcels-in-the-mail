@@ -109,6 +109,7 @@ public class UserService extends CrudService<User>  implements org.springframewo
         read.setLastname(entity.getLastname());
         read.setPassportNumber(entity.getPassportNumber());
         read.setAddress(entity.getAddress());
+        read.setImage(entity.getImage());
         read.setRoles(entity.getRoles());
     }
 
