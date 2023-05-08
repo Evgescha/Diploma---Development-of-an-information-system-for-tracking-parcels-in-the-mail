@@ -12,62 +12,58 @@
 
 <div class="container-fluid py-5">
     <div class="container">
-        <div class="row align-items-center">
-            <h3 th:if="${message!=null}" th:text="${message}">Message</h3>
-            <table>
-                <tr>
-                    <th>sender:</th>
-                    <td th:text="${entity.sender}"></td>
-                </tr>
-                <tr>
-                    <th>recipient:</th>
-                    <td th:text="${entity.recipient}"></td>
-                </tr>
-                <tr>
-                    <th>weight:</th>
-                    <td th:text="${entity.weight}"></td>
-                </tr>
-                <tr>
-                    <th>cost:</th>
-                    <td th:text="${entity.cost}"></td>
-                </tr>
-                <tr>
-                    <th>dispatchDate:</th>
-                    <td th:text="${entity.dispatchDate}"></td>
-                </tr>
-                <tr>
-                    <th>deliveryDate:</th>
-                    <td th:text="${entity.deliveryDate}"></td>
-                </tr>
-                <tr>
-                    <th>trackingStatuses:</th>
-                    <td>
-                        <ul>
-                            <li th:each="trackingStatuses_item : ${entity.trackingStatuses}"
-                                th:text="${trackingStatuses_item}"></li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
-                    <th>routes:</th>
-                    <td>
-                        <ul>
-                            <li th:each="routes_item : ${entity.routes}" th:text="${routes_item}"></li>
-                        </ul>
-                    </td>
-                </tr>
-
-
-            </table>
-            <br>
-            <a th:href="@{/parcel}">Back to the List</a>
-            <a th:href="@{/parcel/edit/{id}(id=${entity.id})}">Edit</a>
-            <form th:if="${entity.id!=null}" method="get"
-                  th:action="'/parcel/'
-               + ${entity.id} + '/delete'">
-                <input type="submit" value="Delete" onclick="return confirm('Are you sure?')">
-            </form>
+        <div class="row">
+            <div class="col-md-8">
+                <h3>Parcel Information</h3>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Sender</th>
+                        <td th:text="${entity.sender.fullName()}"></td>
+                    </tr>
+                    <tr>
+                        <th>Recipient</th>
+                        <td th:text="${entity.recipient.fullName()}"></td>
+                    </tr>
+                    <tr>
+                        <th>Weight</th>
+                        <td th:text="${entity.weight}"></td>
+                    </tr>
+                    <tr>
+                        <th>Cost</th>
+                        <td th:text="${entity.cost}"></td>
+                    </tr>
+                    <tr>
+                        <th>Dispatch Date</th>
+                        <td th:text="${entity.dispatchDate}"></td>
+                    </tr>
+                    <tr>
+                        <th>Delivery Date</th>
+                        <td th:text="${entity.deliveryDate}"></td>
+                    </tr>
+                    <tr>
+                        <th>Status</th>
+                        <td th:text="${entity.status}"></td>
+                    </tr>
+                </table>
+                <div class="d-flex">
+                    <a class="btn btn-primary" th:href="@{/parcel/edit/{id}(id=${entity.id})}">Edit Parcel</a>
+                    <form th:if="${entity.id!=null}" method="get" th:action="'/parcel/' + ${entity.id} + '/delete'">
+                        <input type="submit" class="btn btn-primary" value="Delete" onclick="return confirm('Are you sure?')">
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h3>Routes</h3>
+                <ul class="list-group">
+                    <li class="list-group-item" th:each="route : ${entity.routes}">
+                        <strong th:text="${route.locations.address}"></strong>
+                        <br/>
+                        <small th:text="${route.dateTime}"></small>
+                    </li>
+                </ul>
+            </div>
         </div>
+
     </div>
 </div>
 

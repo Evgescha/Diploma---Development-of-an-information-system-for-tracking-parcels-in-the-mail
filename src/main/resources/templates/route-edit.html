@@ -20,15 +20,17 @@
                 <div class="bg-secondary" style="padding: 30px;">
                     <h3 th:if="${message != null}" th:text="${message}">Message</h3>
                     <form th:action="@{/route}" th:object="${entity}" method="post">
-                        <div class="control-group">
-                            <label class="info-title" for="parcel">Parcel <span>*</span></label>
-                            <input type="text" class="form-control border-0 p-4" th:field="*{parcel}" id="parcel" placeholder="Parcel" required>
-                            <p class="help-block text-danger"></p>
+                        <div class="form-group">
+                            <label class="info-title" for="roles">Parcel <span>*</span></label>
+                            <select th:field="*{parcel}" id="roles" class="form-control unicase-form-control text-input" style="min-height: 100px">
+                                <option th:each="item : ${parcels}" th:value="${item.id}" th:text="${item}"></option>
+                            </select>
                         </div>
-                        <div class="control-group">
-                            <label class="info-title" for="locations">Locations <span>*</span></label>
-                            <input type="text" class="form-control border-0 p-4" th:field="*{locations}" id="locations" placeholder="Locations" required>
-                            <p class="help-block text-danger"></p>
+                        <div class="form-group">
+                            <label class="info-title" for="roles">Locations <span>*</span></label>
+                            <select th:field="*{locations}" id="roles" class="form-control unicase-form-control text-input" style="min-height: 100px">
+                                <option th:each="item : ${locations}" th:value="${item.id}" th:text="${item.address}"></option>
+                            </select>
                         </div>
                         <div class="control-group">
                             <label class="info-title" for="dateTime">Date Time <span>*</span></label>

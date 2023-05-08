@@ -36,7 +36,12 @@
                         <td th:text=${entity.passportNumber}></td>
                         <td> <img th:src="${entity.image}" style="width: 100px; height: 100px"></td>
                         <td th:text=${entity.address}></td>
-                        <td>
+                        <td style="
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;
+                            ">
                             <a class="btn btn-secondary btn-sm" th:href="@{/user/{id}(id=${entity.id})}">See detail</a>
                             <a class="btn btn-primary btn-sm" th:href="@{/user/edit/{id}(id=${entity.id})}">Edit</a>
                             <form th:if="${entity.id!=null}" method="get" th:action="'/user/' +${entity.id}+'/delete'" class="d-inline">

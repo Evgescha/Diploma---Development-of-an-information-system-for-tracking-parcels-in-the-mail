@@ -2,6 +2,7 @@ package com.hescha.mailtracking.controller;
 
 import com.hescha.mailtracking.model.Parcel;
 import com.hescha.mailtracking.model.ParcelStatus;
+import com.hescha.mailtracking.model.User;
 import com.hescha.mailtracking.service.ParcelService;
 import com.hescha.mailtracking.service.RouteService;
 import com.hescha.mailtracking.service.UserService;
@@ -64,6 +65,14 @@ public class ParcelController {
         if (entity.getId() == null) {
             try {
                 Parcel createdEntity = service.create(entity);
+                User sender = userService.read(entity.getSender().getId());
+                User recipient = userService.read(entity.getRecipient().getId());
+
+                sender.getSendedParcel().add(createdEntity);
+                recipient.getReceivedParcel().add(createdEntity);
+                userService.update(sender);
+                userService.update(recipient);
+
                 ra.addFlashAttribute(MESSAGE, "Creating is successful");
                 return REDIRECT_TO_ALL_ITEMS + "/" + createdEntity.getId();
             } catch (Exception e) {
@@ -73,7 +82,23 @@ public class ParcelController {
             return REDIRECT_TO_ALL_ITEMS;
         } else {
             try {
-                service.update(entity.getId(), entity);
+                Parcel parcel = service.read(entity.getId());
+                User oldSender = userService.read(entity.getSender().getId());
+                User oldRecipient = userService.read(entity.getRecipient().getId());
+                oldSender.getSendedParcel().remove(parcel);
+                oldRecipient.getReceivedParcel().remove(parcel);
+                userService.update(oldSender);
+                userService.update(oldRecipient);
+
+                Parcel updatedEntity = service.update(entity.getId(), entity);
+
+                User newSender = userService.read(entity.getSender().getId());
+                User newRecipient = userService.read(entity.getRecipient().getId());
+                newSender.getSendedParcel().add(updatedEntity);
+                newRecipient.getReceivedParcel().add(updatedEntity);
+                userService.update(newSender);
+                userService.update(newRecipient);
+
                 ra.addFlashAttribute(MESSAGE, "Editing is successful");
             } catch (Exception e) {
                 e.printStackTrace();

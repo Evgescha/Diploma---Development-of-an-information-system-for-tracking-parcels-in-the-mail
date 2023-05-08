@@ -52,8 +52,8 @@ public class RouteController {
             model.addAttribute("entity", service.read(id));
         }
 
-        model.addAttribute("parcel_list", parcelService.readAll());
-        model.addAttribute("location_list", locationService.readAll());
+        model.addAttribute("parcels", parcelService.readAll());
+        model.addAttribute("locations", locationService.readAll());
 
         return THYMELEAF_TEMPLATE_EDIT_PAGE;
     }

@@ -26,4 +26,9 @@ public class Parcel extends AbstractEntity {
     @OneToMany
     private List<Route> routes = new ArrayList<>();
     private ParcelStatus status = ParcelStatus.CREATED;
+
+    @Override
+    public String toString() {
+        return id + "-" + status + "-" + recipient.getAddress();
+    }
 }

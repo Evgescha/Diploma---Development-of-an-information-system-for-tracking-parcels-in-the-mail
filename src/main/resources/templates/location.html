@@ -32,7 +32,12 @@
                         <td th:text=${entity.latitude}></td>
                         <td th:text=${entity.longitude}></td>
                         <td th:text=${entity.contactInfo}></td>
-                        <td>
+                        <td style="
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;
+                            ">
                             <a class="btn btn-secondary btn-sm" th:href="@{/location/{id}(id=${entity.id})}">See detail</a>
                             <a class="btn btn-primary btn-sm" th:href="@{/location/edit/{id}(id=${entity.id})}">Edit</a>
                             <form th:if="${entity.id!=null}" method="get" th:action="'/location/' +${entity.id}+'/delete'" class="d-inline">
