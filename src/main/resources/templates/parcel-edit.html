@@ -10,54 +10,64 @@
 <div th:replace="~{/commons/topbar :: topbar}"></div>
 <div th:replace="~{/commons/navbar :: navbar}"></div>
 <div th:replace="~{/commons/head :: page('Edit parcel')}"></div>
-
-<h3 th:if="${message != null}" th:text="${message}">Message</h3>
-<form th:action="@{/parcel}" th:object="${entity}" method="post">
-
-    <p>
-        <label for="sender">sender:</label>
-        <input type="text" th:field="*{sender}" id="sender" required>
-    </p>
-    <p>
-        <label for="recipient">recipient:</label>
-        <input type="text" th:field="*{recipient}" id="recipient" required>
-    </p>
-    <p>
-        <label for="weight">weight:</label>
-        <input type="text" th:field="*{weight}" id="weight" required>
-    </p>
-    <p>
-        <label for="cost">cost:</label>
-        <input type="text" th:field="*{cost}" id="cost" required>
-    </p>
-    <p>
-        <label for="dispatchDate">dispatchDate:</label>
-        <input type="text" th:field="*{dispatchDate}" id="dispatchDate" required>
-    </p>
-    <p>
-        <label for="deliveryDate">deliveryDate:</label>
-        <input type="text" th:field="*{deliveryDate}" id="deliveryDate" required>
-    </p>
-    <p>
-        <label for="trackingStatuses">trackingStatuses:</label>
-        <select multiple="multiple" th:field="*{trackingStatuses}" id="trackingStatuses">
-            <option th:each="trackingStatuses_item : ${trackingStatuses_list}" th:value="${trackingStatuses_item}"
-                    th:text="${trackingStatuses_item}"></option>
-        </select>
-    </p>
-    <p>
-        <label for="routes">routes:</label>
-        <select multiple="multiple" th:field="*{routes}" id="routes">
-            <option th:each="routes_item : ${routes_list}" th:value="${routes_item}" th:text="${routes_item}"></option>
-        </select>
-    </p>
-
-    <p>
-        <input type="text" th:field="*{id}" id="id">
-        <input type="submit" value="Save">
-        <a th:href="@{/parcel}">Cancel</a>
-    </p>
-</form>
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 th:if="${message != null}" th:text="${message}">Message</h3>
+                <h6 class="text-primary text-uppercase font-weight-bold">Add Parcel</h6>
+                <div class="contact-form bg-secondary" style="padding: 30px;">
+                    <div id="success"></div>
+                    <form th:action="@{/parcel}" th:object="${entity}" method="post" name="sentMessage" id="parcelForm" novalidate="novalidate">
+                        <div class="control-group">
+                            <label class="info-title" for="sender">Sender <span>*</span></label>
+                            <input type="text" class="form-control border-0 p-4" th:field="*{sender}" id="sender" placeholder="Sender" required="required" data-validation-required-message="Please enter the sender"/>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <label class="info-title" for="recipient">Recipient <span>*</span></label>
+                            <input type="text" class="form-control border-0 p-4" th:field="*{recipient}" id="recipient" placeholder="Recipient" required="required" data-validation-required-message="Please enter the recipient"/>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <label class="info-title" for="weight">Weight <span>*</span></label>
+                            <input type="text" class="form-control border-0 p-4" th:field="*{weight}" id="weight" placeholder="Weight" required="required" data-validation-required-message="Please enter the weight"/>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <label class="info-title" for="cost">Cost <span>*</span></label>
+                            <input type="text" class="form-control border-0 p-4" th:field="*{cost}" id="cost" placeholder="Cost" required="required" data-validation-required-message="Please enter the cost"/>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <label class="info-title" for="dispatchDate">Dispatch Date <span>*</span></label>
+                            <input type="date" class="form-control border-0 p-4" th:field="*{dispatchDate}" id="dispatchDate" placeholder="Dispatch Date" required="required" data-validation-required-message="Please enter the dispatch date"/>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <label class="info-title" for="deliveryDate">Delivery Date <span>*</span></label>
+                            <input type="date" class="form-control border-0 p-4" th:field="*{deliveryDate}" id="deliveryDate" placeholder="Delivery Date" required="required" data-validation-required-message="Please enter the delivery date"/>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <label for="routes" class="font-weight-bold">Routes:</label>
+                            <select multiple="multiple" class="form-control border-0 p-4" th:field="*{routes}" id="routes">
+                                <option th:each="routes_item : ${routes_list}" th:value="${routes_item}"
+                                        th:text="${routes_item}"></option>
+                            </select>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div>
+                            <input type="text" class="d-none" th:field="*{id}" id="id">
+                            <button class="btn btn-primary py-3 px-4" type="submit" id="saveParcelButton">Save</button>
+                            <a class="btn btn-secondary py-3 px-4" th:href="@{/parcel}">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div th:replace="~{/commons/footer :: footer}"></div>
 <div th:replace="~{/commons/script :: script}"></div>

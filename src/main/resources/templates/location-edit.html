@@ -11,39 +11,46 @@
 <div th:replace="~{/commons/navbar :: navbar}"></div>
 <div th:replace="~{/commons/head :: page('Edit location')}"></div>
 
-
-<h3 th:if="${message != null}" th:text="${message}">Message</h3>
-<form th:action="@{/location}" th:object="${entity}" method="post">
-
-    <p>
-        <label for="address">address:</label>
-        <input type="text" th:field="*{address}" id="address" required>
-    </p>
-    <p>
-        <label for="latitude">latitude:</label>
-        <input type="text" th:field="*{latitude}" id="latitude" required>
-    </p>
-    <p>
-        <label for="longitude">longitude:</label>
-        <input type="text" th:field="*{longitude}" id="longitude" required>
-    </p>
-    <p>
-        <label for="contactInfo">contactInfo:</label>
-        <input type="text" th:field="*{contactInfo}" id="contactInfo" required>
-    </p>
-    <p>
-        <label for="users">users:</label>
-        <select multiple="multiple" th:field="*{users}" id="users">
-            <option th:each="users_item : ${users_list}" th:value="${users_item}" th:text="${users_item}"></option>
-        </select>
-    </p>
-
-    <p>
-        <input type="text" th:field="*{id}" id="id">
-        <input type="submit" value="Save">
-        <a th:href="@{/location}">Cancel</a>
-    </p>
-</form>
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 th:if="${message != null}" th:text="${message}">Message</h3>
+                <h6 class="text-primary text-uppercase font-weight-bold">Add Location</h6>
+                <div class="contact-form bg-secondary" style="padding: 30px;">
+                    <div id="success"></div>
+                    <form th:action="@{/location}" th:object="${entity}" method="post" name="sentMessage" id="locationForm" novalidate="novalidate">
+                        <div class="control-group">
+                            <label class="info-title" for="address">Address <span>*</span></label>
+                            <input type="text" class="form-control border-0 p-4" th:field="*{address}" id="address" placeholder="Address" required="required" data-validation-required-message="Please enter the address"/>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <label class="info-title" for="latitude">Latitude <span>*</span></label>
+                            <input type="text" class="form-control border-0 p-4" th:field="*{latitude}" id="latitude" placeholder="Latitude" required="required" data-validation-required-message="Please enter the latitude"/>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <label class="info-title" for="longitude">Longitude <span>*</span></label>
+                            <input type="text" class="form-control border-0 p-4" th:field="*{longitude}" id="longitude" placeholder="Longitude" required="required" data-validation-required-message="Please enter the longitude"/>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <label class="info-title" for="contactInfo">Contact Info <span>*</span></label>
+                            <input type="text" class="form-control border-0 p-4" th:field="*{contactInfo}" id="contactInfo" placeholder="Contact Info" required="required" data-validation-required-message="Please enter the contact info"/>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div>
+                            <input type="text" th:field="*{id}" id="id" hidden>
+                            <button class="btn btn-primary py-3 px-4" type="submit" id="saveLocationButton">Save</button>
+                            <a class="btn btn-primary py-3 px-4" th:href="@{/location}">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div th:replace="~{/commons/footer :: footer}"></div>
 <div th:replace="~{/commons/script :: script}"></div>

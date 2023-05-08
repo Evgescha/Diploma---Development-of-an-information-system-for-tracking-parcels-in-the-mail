@@ -10,44 +10,42 @@
 <div th:replace="~{/commons/navbar :: navbar}"></div>
 <div th:replace="~{/commons/head :: page('Locations')}"></div>
 
-<h3 th:if="${message != null}" th:text="${message}">Message</h3>
-<a th:href="@{/location/edit}">Create new Location</a>
-<table>
-    <thead>
-    <tr>
-        <th>address</th>
-        <th>latitude</th>
-        <th>longitude</th>
-        <th>contactInfo</th>
-        <th>users</th>
-
-        <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-        <tr th:each="entity : ${list}">
-                                    <td th:text=${entity.address}></td>
-                                            <td th:text=${entity.latitude}></td>
-                                            <td th:text=${entity.longitude}></td>
-                                            <td th:text=${entity.contactInfo}></td>
-                                            <td>
-                    <ul>
-                        <li th:each="users_item : ${entity.users}" th:text="${users_item}"></li>
-                    </ul>
-                </td>
-                
-        <td>
-            <a th:href="@{/location/{id}(id=${entity.id})}">See detail</a>
-            <a th:href="@{/location/edit/{id}(id=${entity.id})}">Edit</a>
-            <form th:if="${entity.id!=null}" method="get"
-                  th:action="'/location/'
-                  +${entity.id}+'/delete'">
-                <input type="submit" value="Delete" onclick="return confirm('Are you sure?')">
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 th:if="${message != null}" th:text="${message}">Message</h3>
+                <a class="btn btn-primary mb-3" th:href="@{/location/edit}">Create new Location</a>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>address</th>
+                        <th>latitude</th>
+                        <th>longitude</th>
+                        <th>contactInfo</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="entity : ${list}">
+                        <td th:text=${entity.address}></td>
+                        <td th:text=${entity.latitude}></td>
+                        <td th:text=${entity.longitude}></td>
+                        <td th:text=${entity.contactInfo}></td>
+                        <td>
+                            <a class="btn btn-secondary btn-sm" th:href="@{/location/{id}(id=${entity.id})}">See detail</a>
+                            <a class="btn btn-primary btn-sm" th:href="@{/location/edit/{id}(id=${entity.id})}">Edit</a>
+                            <form th:if="${entity.id!=null}" method="get" th:action="'/location/' +${entity.id}+'/delete'" class="d-inline">
+                                <input class="btn btn-danger btn-sm" type="submit" value="Delete" onclick="return confirm('Are you sure?')">
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div th:replace="~{/commons/footer :: footer}"></div>
 <div th:replace="~{/commons/script :: script}"></div>

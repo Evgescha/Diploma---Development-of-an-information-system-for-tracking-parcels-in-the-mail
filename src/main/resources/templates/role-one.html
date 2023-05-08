@@ -11,23 +11,29 @@
 <div th:replace="~{/commons/head :: page('Role details')}"></div>
 
 
-<h3 th:if="${message!=null}" th:text="${message}">Message</h3>
-<table>
-    <tr>
-        <th>name:</th>
-        <td th:text="${entity.name}"></td>
-    </tr>
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <h3 th:if="${message!=null}" th:text="${message}">Message</h3>
+            <table>
+                <tr>
+                    <th>name:</th>
+                    <td th:text="${entity.name}"></td>
+                </tr>
 
 
-</table>
-<br>
-<a th:href="@{/role}">Back to the List</a>
-<a th:href="@{/role/edit/{id}(id=${entity.id})}">Edit</a>
-<form th:if="${entity.id!=null}" method="get"
-      th:action="'/role/'
+            </table>
+            <br>
+            <a th:href="@{/role}">Back to the List</a>
+            <a th:href="@{/role/edit/{id}(id=${entity.id})}">Edit</a>
+            <form th:if="${entity.id!=null}" method="get"
+                  th:action="'/role/'
                + ${entity.id} + '/delete'">
-    <input type="submit" value="Delete" onclick="return confirm('Are you sure?')">
-</form>
+                <input type="submit" value="Delete" onclick="return confirm('Are you sure?')">
+            </form>
+        </div>
+    </div>
+</div>
 
 <div th:replace="~{/commons/footer :: footer}"></div>
 <div th:replace="~{/commons/script :: script}"></div>

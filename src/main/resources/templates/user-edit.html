@@ -12,66 +12,65 @@
 <div th:replace="~{/commons/head :: page('Edit user')}"></div>
 
 
-<h3 th:if="${message != null}" th:text="${message}">Message</h3>
-<form th:action="@{/user}" th:object="${entity}" method="post">
-
-    <p>
-        <label for="username">username:</label>
-        <input type="text" th:field="*{username}" id="username" required>
-    </p>
-    <p>
-        <label for="password">password:</label>
-        <input type="text" th:field="*{password}" id="password" required>
-    </p>
-    <p>
-        <label for="firstname">firstname:</label>
-        <input type="text" th:field="*{firstname}" id="firstname" required>
-    </p>
-    <p>
-        <label for="lastname">lastname:</label>
-        <input type="text" th:field="*{lastname}" id="lastname" required>
-    </p>
-    <p>
-        <label for="passportNumber">passportNumber:</label>
-        <input type="text" th:field="*{passportNumber}" id="passportNumber" required>
-    </p>
-    <p>
-        <label for="phoneNumber">phoneNumber:</label>
-        <input type="text" th:field="*{phoneNumber}" id="phoneNumber" required>
-    </p>
-    <p>
-        <label for="address">address:</label>
-        <input type="text" th:field="*{address}" id="address" required>
-    </p>
-    <p>
-        <label for="location">location:</label>
-        <input type="text" th:field="*{location}" id="location" required>
-    </p>
-    <p>
-        <label for="role">role:</label>
-        <input type="text" th:field="*{role}" id="role" required>
-    </p>
-    <p>
-        <label for="sendedParcel">sendedParcel:</label>
-        <select multiple="multiple" th:field="*{sendedParcel}" id="sendedParcel">
-            <option th:each="sendedParcel_item : ${sendedParcel_list}" th:value="${sendedParcel_item}"
-                    th:text="${sendedParcel_item}"></option>
-        </select>
-    </p>
-    <p>
-        <label for="receivedParcel">receivedParcel:</label>
-        <select multiple="multiple" th:field="*{receivedParcel}" id="receivedParcel">
-            <option th:each="receivedParcel_item : ${receivedParcel_list}" th:value="${receivedParcel_item}"
-                    th:text="${receivedParcel_item}"></option>
-        </select>
-    </p>
-
-    <p>
-        <input type="text" th:field="*{id}" id="id">
-        <input type="submit" value="Save">
-        <a th:href="@{/user}">Cancel</a>
-    </p>
-</form>
+<div class="body-content outer-top-bd mt-5">
+    <div class="container">
+        <div class="sign-in-page inner-bottom-sm">
+            <div class="row">
+                <h3 th:if="${message != null}" th:text="${message}" class="text-center"></h3>
+                <div class="col-md-12">
+                    <h4 class="">Edit Profile</h4>
+                    <form th:action="@{/user}" th:object="${entity}" method="post" class="register-form outer-top-xs">
+                        <div class="form-group">
+                            <label class="info-title" for="username">Username <span>*</span></label>
+                            <input type="text" th:field="*{username}" id="username" class="form-control unicase-form-control text-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="info-title" for="password">Password <span>*</span></label>
+                            <input type="text" id="password" class="form-control unicase-form-control text-input" required name="password">
+                        </div>
+                        <div class="form-group">
+                            <label class="info-title" for="firstname">First Name <span>*</span></label>
+                            <input type="text" th:field="*{firstname}" id="firstname" class="form-control unicase-form-control text-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="info-title" for="lastname">Last Name <span>*</span></label>
+                            <input type="text" th:field="*{lastname}" id="lastname" class="form-control unicase-form-control text-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="info-title" for="passportNumber">Passport number <span>*</span></label>
+                            <input type="text" th:field="*{passportNumber}" id="passportNumber" class="form-control unicase-form-control text-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="info-title" for="image">Image URL <span>*</span></label>
+                            <input type="text" th:field="*{image}" id="image" class="form-control unicase-form-control text-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="info-title" for="address">Address <span>*</span></label>
+                            <input type="text" th:field="*{address}" id="address" class="form-control unicase-form-control text-input" required>
+                        </div>
+                        <div class="form-group" th:if="${#request.isUserInRole('ADMIN') }">
+                            <label class="info-title" for="roles">Roles <span>*</span></label>
+                            <select multiple="multiple" th:field="*{roles}" id="roles" class="form-control unicase-form-control text-input" style="min-height: 100px">
+                                <option th:each="roles_item : ${role_list}" th:value="${roles_item.id}" th:text="${roles_item.name}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group" th:if="${!#request.isUserInRole('ADMIN') }"  style="opacity: 0">
+                            <label class="info-title" for="roles">Roles <span>*</span></label>
+                            <select multiple="multiple" th:field="*{roles}" id="roles" class="form-control unicase-form-control text-input" style="min-height: 100px">
+                                <option th:each="roles_item : ${role_list}" th:value="${roles_item.id}" th:text="${roles_item.name}"></option>
+                            </select>
+                        </div>
+                        <input type="hidden" th:field="*{id}" id="id">
+                        <div class="form-group">
+                            <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Save</button>
+                            <a th:href="@{/user}" class="btn btn-default">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div th:replace="~{/commons/footer :: footer}"></div>
 <div th:replace="~{/commons/script :: script}"></div>

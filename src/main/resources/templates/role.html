@@ -11,32 +11,37 @@
 <div th:replace="~{/commons/head :: page('Roles')}"></div>
 
 
-<h3 th:if="${message != null}" th:text="${message}">Message</h3>
-<a th:href="@{/role/edit}">Create new Role</a>
-<table>
-    <thead>
-    <tr>
-        <th>name</th>
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <h3 th:if="${message != null}" th:text="${message}">Message</h3>
+            <a th:href="@{/role/edit}">Create new Role</a>
+            <table>
+                <thead>
+                <tr>
+                    <th>name</th>
 
-        <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="entity : ${list}">
-        <td th:text=${entity.name}></td>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="entity : ${list}">
+                    <td th:text=${entity.name}></td>
 
-        <td>
-            <a th:href="@{/role/{id}(id=${entity.id})}">See detail</a>
-            <a th:href="@{/role/edit/{id}(id=${entity.id})}">Edit</a>
-            <form th:if="${entity.id!=null}" method="get"
-                  th:action="'/role/'
-                  +${entity.id}+'/delete'">
-                <input type="submit" value="Delete" onclick="return confirm('Are you sure?')">
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
+                    <td>
+                        <a th:href="@{/role/{id}(id=${entity.id})}">See detail</a>
+                        <a th:href="@{/role/edit/{id}(id=${entity.id})}">Edit</a>
+                        <form th:if="${entity.id!=null}" method="get"
+                              th:action="'/role/' +${entity.id}+'/delete'">
+                            <input type="submit" value="Delete" onclick="return confirm('Are you sure?')">
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 <div th:replace="~{/commons/footer :: footer}"></div>
 <div th:replace="~{/commons/script :: script}"></div>

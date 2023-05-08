@@ -29,6 +29,12 @@
                    th:if="${#request.userPrincipal == null}">Login</a>
                 <a href="/logout" class="nav-item nav-link"
                    th:if="${#request.userPrincipal != null}">Logout</a>
+
+
+
+                <a href="/location" class="nav-item nav-link">location</a>
+                <a href="/parcel" class="nav-item nav-link">parcel</a>
+                <a href="/route" class="nav-item nav-link">route</a>
             </div>
         </div>
     </nav>

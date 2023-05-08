@@ -11,29 +11,42 @@
 <div th:replace="~{/commons/navbar :: navbar}"></div>
 <div th:replace="~{/commons/head :: page('Edit route')}"></div>
 
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h6 class="text-primary text-uppercase font-weight-bold">Add/Edit Route</h6>
+                <h1 class="mb-4">Enter Route Details</h1>
+                <div class="bg-secondary" style="padding: 30px;">
+                    <h3 th:if="${message != null}" th:text="${message}">Message</h3>
+                    <form th:action="@{/route}" th:object="${entity}" method="post">
+                        <div class="control-group">
+                            <label class="info-title" for="parcel">Parcel <span>*</span></label>
+                            <input type="text" class="form-control border-0 p-4" th:field="*{parcel}" id="parcel" placeholder="Parcel" required>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <label class="info-title" for="locations">Locations <span>*</span></label>
+                            <input type="text" class="form-control border-0 p-4" th:field="*{locations}" id="locations" placeholder="Locations" required>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <label class="info-title" for="dateTime">Date Time <span>*</span></label>
+                            <input type="date" class="form-control border-0 p-4" th:field="*{dateTime}" id="dateTime" placeholder="Date Time" required>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div>
+                            <input type="text" class="d-none" th:field="*{id}" id="id">
+                            <button class="btn btn-primary py-3 px-4" type="submit" id="saveRouteButton">Save</button>
+                            <a class="btn btn-secondary py-3 px-4" th:href="@{/route}">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h3 th:if="${message != null}" th:text="${message}">Message</h3>
-<form th:action="@{/route}" th:object="${entity}" method="post">
-
-    <p>
-        <label for="parcel">parcel:</label>
-        <input type="text" th:field="*{parcel}" id="parcel" required>
-    </p>
-    <p>
-        <label for="locations">locations:</label>
-        <input type="text" th:field="*{locations}" id="locations" required>
-    </p>
-    <p>
-        <label for="dateTime">dateTime:</label>
-        <input type="text" th:field="*{dateTime}" id="dateTime" required>
-    </p>
-
-    <p>
-        <input type="text" th:field="*{id}" id="id">
-        <input type="submit" value="Save">
-        <a th:href="@{/route}">Cancel</a>
-    </p>
-</form>
 
 
 <div th:replace="~{/commons/footer :: footer}"></div>

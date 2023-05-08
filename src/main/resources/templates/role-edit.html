@@ -12,20 +12,26 @@
 <div th:replace="~{/commons/head :: page('Edit role')}"></div>
 
 
-<h3 th:if="${message != null}" th:text="${message}">Message</h3>
-<form th:action="@{/role}" th:object="${entity}" method="post">
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <h3 th:if="${message != null}" th:text="${message}">Message</h3>
+            <form th:action="@{/role}" th:object="${entity}" method="post">
 
-    <p>
-        <label for="name">name:</label>
-        <input type="text" th:field="*{name}" id="name" required>
-    </p>
+                <p>
+                    <label for="name">name:</label>
+                    <input type="text" th:field="*{name}" id="name" required>
+                </p>
 
-    <p>
-        <input type="text" th:field="*{id}" id="id">
-        <input type="submit" value="Save">
-        <a th:href="@{/role}">Cancel</a>
-    </p>
-</form>
+                <p>
+                    <input type="text" th:field="*{id}" id="id">
+                    <input type="submit" value="Save">
+                    <a th:href="@{/role}">Cancel</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 <div th:replace="~{/commons/footer :: footer}"></div>
