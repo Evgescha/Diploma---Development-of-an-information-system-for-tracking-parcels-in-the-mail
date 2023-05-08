@@ -3,16 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Role</title>
+    <head th:replace="~{/commons/head :: head}"></head>
 </head>
+
 <body>
-<h1>Edit Role</h1>
+<div th:replace="~{/commons/topbar :: topbar}"></div>
+<div th:replace="~{/commons/navbar :: navbar}"></div>
+<div th:replace="~{/commons/head :: page('Edit role')}"></div>
+
+
 <h3 th:if="${message != null}" th:text="${message}">Message</h3>
 <form th:action="@{/role}" th:object="${entity}" method="post">
 
     <p>
         <label for="name">name:</label>
-            <input type="text" th:field="*{name}" id="name" required>
-        </p>
+        <input type="text" th:field="*{name}" id="name" required>
+    </p>
 
     <p>
         <input type="text" th:field="*{id}" id="id">
@@ -21,5 +27,8 @@
     </p>
 </form>
 
+
+<div th:replace="~{/commons/footer :: footer}"></div>
+<div th:replace="~{/commons/script :: script}"></div>
 </body>
 </html>

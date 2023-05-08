@@ -2,10 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>List of User</title>
-    <meta charset="UTF-8">
+    <head th:replace="~{/commons/head :: head}"></head>
 </head>
+
 <body>
-<h1>List of User</h1>
+<div th:replace="~{/commons/topbar :: topbar}"></div>
+<div th:replace="~{/commons/navbar :: navbar}"></div>
+<div th:replace="~{/commons/head :: page('Users')}"></div>
+
+
 <h3 th:if="${message != null}" th:text="${message}">Message</h3>
 <a th:href="@{/user/edit}">Create new User</a>
 <table>
@@ -27,27 +32,27 @@
     </tr>
     </thead>
     <tbody>
-        <tr th:each="entity : ${list}">
-                                    <td th:text=${entity.username}></td>
-                                            <td th:text=${entity.password}></td>
-                                            <td th:text=${entity.firstname}></td>
-                                            <td th:text=${entity.lastname}></td>
-                                            <td th:text=${entity.passportNumber}></td>
-                                            <td th:text=${entity.phoneNumber}></td>
-                                            <td th:text=${entity.address}></td>
-                                            <td th:text=${entity.location}></td>
-                                            <td th:text=${entity.role}></td>
-                                            <td>
-                    <ul>
-                        <li th:each="sendedParcel_item : ${entity.sendedParcel}" th:text="${sendedParcel_item}"></li>
-                    </ul>
-                </td>
-                                            <td>
-                    <ul>
-                        <li th:each="receivedParcel_item : ${entity.receivedParcel}" th:text="${receivedParcel_item}"></li>
-                    </ul>
-                </td>
-                
+    <tr th:each="entity : ${list}">
+        <td th:text=${entity.username}></td>
+        <td th:text=${entity.password}></td>
+        <td th:text=${entity.firstname}></td>
+        <td th:text=${entity.lastname}></td>
+        <td th:text=${entity.passportNumber}></td>
+        <td th:text=${entity.phoneNumber}></td>
+        <td th:text=${entity.address}></td>
+        <td th:text=${entity.location}></td>
+        <td th:text=${entity.role}></td>
+        <td>
+            <ul>
+                <li th:each="sendedParcel_item : ${entity.sendedParcel}" th:text="${sendedParcel_item}"></li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li th:each="receivedParcel_item : ${entity.receivedParcel}" th:text="${receivedParcel_item}"></li>
+            </ul>
+        </td>
+
         <td>
             <a th:href="@{/user/{id}(id=${entity.id})}">See detail</a>
             <a th:href="@{/user/edit/{id}(id=${entity.id})}">Edit</a>
@@ -60,5 +65,8 @@
     </tr>
     </tbody>
 </table>
+
+<div th:replace="~{/commons/footer :: footer}"></div>
+<div th:replace="~{/commons/script :: script}"></div>
 </body>
 </html>

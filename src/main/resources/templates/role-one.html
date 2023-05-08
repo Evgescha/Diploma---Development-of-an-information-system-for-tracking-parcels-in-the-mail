@@ -2,26 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>View Role</title>
-    <meta charset="UTF-8">
+    <head th:replace="~{/commons/head :: head}"></head>
 </head>
+
 <body>
-<h1>Role Details</h1>
+<div th:replace="~{/commons/topbar :: topbar}"></div>
+<div th:replace="~{/commons/navbar :: navbar}"></div>
+<div th:replace="~{/commons/head :: page('Role details')}"></div>
+
+
 <h3 th:if="${message!=null}" th:text="${message}">Message</h3>
 <table>
-        <tr>
+    <tr>
         <th>name:</th>
-                <td th:text="${entity.name}"></td>
-            </tr>
-    
+        <td th:text="${entity.name}"></td>
+    </tr>
+
 
 </table>
 <br>
 <a th:href="@{/role}">Back to the List</a>
 <a th:href="@{/role/edit/{id}(id=${entity.id})}">Edit</a>
 <form th:if="${entity.id!=null}" method="get"
-         th:action="'/role/'
+      th:action="'/role/'
                + ${entity.id} + '/delete'">
     <input type="submit" value="Delete" onclick="return confirm('Are you sure?')">
 </form>
+
+<div th:replace="~{/commons/footer :: footer}"></div>
+<div th:replace="~{/commons/script :: script}"></div>
 </body>
 </html>

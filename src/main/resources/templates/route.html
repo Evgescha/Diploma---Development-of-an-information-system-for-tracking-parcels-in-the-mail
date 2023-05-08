@@ -2,10 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>List of Route</title>
-    <meta charset="UTF-8">
+    <head th:replace="~{/commons/head :: head}"></head>
 </head>
+
 <body>
-<h1>List of Route</h1>
+<div th:replace="~{/commons/topbar :: topbar}"></div>
+<div th:replace="~{/commons/navbar :: navbar}"></div>
+<div th:replace="~{/commons/head :: page('Route')}"></div>
+
+
 <h3 th:if="${message != null}" th:text="${message}">Message</h3>
 <a th:href="@{/route/edit}">Create new Route</a>
 <table>
@@ -19,11 +24,11 @@
     </tr>
     </thead>
     <tbody>
-        <tr th:each="entity : ${list}">
-                                    <td th:text=${entity.parcel}></td>
-                                            <td th:text=${entity.locations}></td>
-                                            <td th:text=${entity.dateTime}></td>
-                
+    <tr th:each="entity : ${list}">
+        <td th:text=${entity.parcel}></td>
+        <td th:text=${entity.locations}></td>
+        <td th:text=${entity.dateTime}></td>
+
         <td>
             <a th:href="@{/route/{id}(id=${entity.id})}">See detail</a>
             <a th:href="@{/route/edit/{id}(id=${entity.id})}">Edit</a>
@@ -36,5 +41,8 @@
     </tr>
     </tbody>
 </table>
+
+<div th:replace="~{/commons/footer :: footer}"></div>
+<div th:replace="~{/commons/script :: script}"></div>
 </body>
 </html>

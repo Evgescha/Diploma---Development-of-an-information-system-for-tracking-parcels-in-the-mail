@@ -2,74 +2,81 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>View User</title>
-    <meta charset="UTF-8">
+    <head th:replace="~{/commons/head :: head}"></head>
 </head>
+
 <body>
-<h1>User Details</h1>
+<div th:replace="~{/commons/topbar :: topbar}"></div>
+<div th:replace="~{/commons/navbar :: navbar}"></div>
+<div th:replace="~{/commons/head :: page('User profile')}"></div>
+
+
 <h3 th:if="${message!=null}" th:text="${message}">Message</h3>
 <table>
-        <tr>
+    <tr>
         <th>username:</th>
-                <td th:text="${entity.username}"></td>
-            </tr>
-        <tr>
+        <td th:text="${entity.username}"></td>
+    </tr>
+    <tr>
         <th>password:</th>
-                <td th:text="${entity.password}"></td>
-            </tr>
-        <tr>
+        <td th:text="${entity.password}"></td>
+    </tr>
+    <tr>
         <th>firstname:</th>
-                <td th:text="${entity.firstname}"></td>
-            </tr>
-        <tr>
+        <td th:text="${entity.firstname}"></td>
+    </tr>
+    <tr>
         <th>lastname:</th>
-                <td th:text="${entity.lastname}"></td>
-            </tr>
-        <tr>
+        <td th:text="${entity.lastname}"></td>
+    </tr>
+    <tr>
         <th>passportNumber:</th>
-                <td th:text="${entity.passportNumber}"></td>
-            </tr>
-        <tr>
+        <td th:text="${entity.passportNumber}"></td>
+    </tr>
+    <tr>
         <th>phoneNumber:</th>
-                <td th:text="${entity.phoneNumber}"></td>
-            </tr>
-        <tr>
+        <td th:text="${entity.phoneNumber}"></td>
+    </tr>
+    <tr>
         <th>address:</th>
-                <td th:text="${entity.address}"></td>
-            </tr>
-        <tr>
+        <td th:text="${entity.address}"></td>
+    </tr>
+    <tr>
         <th>location:</th>
-                <td th:text="${entity.location}"></td>
-            </tr>
-        <tr>
+        <td th:text="${entity.location}"></td>
+    </tr>
+    <tr>
         <th>role:</th>
-                <td th:text="${entity.role}"></td>
-            </tr>
-        <tr>
+        <td th:text="${entity.role}"></td>
+    </tr>
+    <tr>
         <th>sendedParcel:</th>
-                <td>
+        <td>
             <ul>
                 <li th:each="sendedParcel_item : ${entity.sendedParcel}" th:text="${sendedParcel_item}"></li>
             </ul>
         </td>
-            </tr>
-        <tr>
+    </tr>
+    <tr>
         <th>receivedParcel:</th>
-                <td>
+        <td>
             <ul>
                 <li th:each="receivedParcel_item : ${entity.receivedParcel}" th:text="${receivedParcel_item}"></li>
             </ul>
         </td>
-            </tr>
-    
+    </tr>
+
 
 </table>
 <br>
 <a th:href="@{/user}">Back to the List</a>
 <a th:href="@{/user/edit/{id}(id=${entity.id})}">Edit</a>
 <form th:if="${entity.id!=null}" method="get"
-         th:action="'/user/'
-               + ${entity.id} + '/delete'">
+      th:action="'/user/' + ${entity.id} + '/delete'">
     <input type="submit" value="Delete" onclick="return confirm('Are you sure?')">
 </form>
+
+<div th:replace="~{/commons/footer :: footer}"></div>
+<div th:replace="~{/commons/script :: script}"></div>
 </body>
 </html>

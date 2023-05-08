@@ -1,34 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <title>FASTER - Logistics Company Website Template</title>
-    <head th:replace="~{/commons/head :: head}"></head>
-</head>
-
-<body>
-<div th:replace="~{/commons/topbar :: topbar}"></div>
-<div th:replace="~{/commons/navbar :: navbar}"></div>
-
-<!-- Header Start -->
-<div class="jumbotron jumbotron-fluid mb-5">
-    <div class="container text-center py-5">
-        <h1 class="text-white display-3">Service</h1>
-        <div class="d-inline-flex align-items-center text-white">
-            <p class="m-0"><a class="text-white" href="/">Home</a></p>
-            <i class="fa fa-circle px-3"></i>
-            <p class="m-0">Service</p>
-        </div>
-    </div>
-</div>
-<!-- Header End -->
-
-<div th:replace="~{/commons/service :: service}"></div>
-<div th:replace="~{/commons/quote :: quote}"></div>
-<div th:replace="~{/commons/testimonial :: testimonial}"></div>
-<div th:replace="~{/commons/footer :: footer}"></div>
-<div th:replace="~{/commons/script :: script}"></div>
-</body>
-
+    <head>
+        <meta charset="utf-8">
+        <title>FASTER - Logistics Company Website Template</title>
+        <head th:replace="~{/commons/head :: head}"></head>
+    </head>
+    <body>
+        <div th:replace="~{/commons/topbar :: topbar}"></div>
+        <div th:replace="~{/commons/navbar :: navbar}"></div>
+        <div th:replace="~{/commons/head :: page('Service')}"></div>
+        <div th:replace="~{/commons/service :: service}"></div>
+        <div th:replace="~{/commons/quote :: quote}"></div>
+        <div th:replace="~{/commons/testimonial :: testimonial}"></div>
+        <div th:replace="~{/commons/footer :: footer}"></div>
+        <div th:replace="~{/commons/script :: script}"></div>
+    </body>
 </html>

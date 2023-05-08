@@ -2,62 +2,70 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>View Parcel</title>
-    <meta charset="UTF-8">
+    <head th:replace="~{/commons/head :: head}"></head>
 </head>
+
 <body>
-<h1>Parcel Details</h1>
+<div th:replace="~{/commons/topbar :: topbar}"></div>
+<div th:replace="~{/commons/navbar :: navbar}"></div>
+<div th:replace="~{/commons/head :: page('Parcel Details')}"></div>
+
 <h3 th:if="${message!=null}" th:text="${message}">Message</h3>
 <table>
-        <tr>
+    <tr>
         <th>sender:</th>
-                <td th:text="${entity.sender}"></td>
-            </tr>
-        <tr>
+        <td th:text="${entity.sender}"></td>
+    </tr>
+    <tr>
         <th>recipient:</th>
-                <td th:text="${entity.recipient}"></td>
-            </tr>
-        <tr>
+        <td th:text="${entity.recipient}"></td>
+    </tr>
+    <tr>
         <th>weight:</th>
-                <td th:text="${entity.weight}"></td>
-            </tr>
-        <tr>
+        <td th:text="${entity.weight}"></td>
+    </tr>
+    <tr>
         <th>cost:</th>
-                <td th:text="${entity.cost}"></td>
-            </tr>
-        <tr>
+        <td th:text="${entity.cost}"></td>
+    </tr>
+    <tr>
         <th>dispatchDate:</th>
-                <td th:text="${entity.dispatchDate}"></td>
-            </tr>
-        <tr>
+        <td th:text="${entity.dispatchDate}"></td>
+    </tr>
+    <tr>
         <th>deliveryDate:</th>
-                <td th:text="${entity.deliveryDate}"></td>
-            </tr>
-        <tr>
+        <td th:text="${entity.deliveryDate}"></td>
+    </tr>
+    <tr>
         <th>trackingStatuses:</th>
-                <td>
+        <td>
             <ul>
-                <li th:each="trackingStatuses_item : ${entity.trackingStatuses}" th:text="${trackingStatuses_item}"></li>
+                <li th:each="trackingStatuses_item : ${entity.trackingStatuses}"
+                    th:text="${trackingStatuses_item}"></li>
             </ul>
         </td>
-            </tr>
-        <tr>
+    </tr>
+    <tr>
         <th>routes:</th>
-                <td>
+        <td>
             <ul>
                 <li th:each="routes_item : ${entity.routes}" th:text="${routes_item}"></li>
             </ul>
         </td>
-            </tr>
-    
+    </tr>
+
 
 </table>
 <br>
 <a th:href="@{/parcel}">Back to the List</a>
 <a th:href="@{/parcel/edit/{id}(id=${entity.id})}">Edit</a>
 <form th:if="${entity.id!=null}" method="get"
-         th:action="'/parcel/'
+      th:action="'/parcel/'
                + ${entity.id} + '/delete'">
     <input type="submit" value="Delete" onclick="return confirm('Are you sure?')">
 </form>
+
+<div th:replace="~{/commons/footer :: footer}"></div>
+<div th:replace="~{/commons/script :: script}"></div>
 </body>
 </html>

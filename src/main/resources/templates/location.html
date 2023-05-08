@@ -2,10 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>List of Location</title>
-    <meta charset="UTF-8">
+    <head th:replace="~{/commons/head :: head}"></head>
 </head>
+
 <body>
-<h1>List of Location</h1>
+<div th:replace="~{/commons/topbar :: topbar}"></div>
+<div th:replace="~{/commons/navbar :: navbar}"></div>
+<div th:replace="~{/commons/head :: page('Locations')}"></div>
+
 <h3 th:if="${message != null}" th:text="${message}">Message</h3>
 <a th:href="@{/location/edit}">Create new Location</a>
 <table>
@@ -44,5 +48,8 @@
     </tr>
     </tbody>
 </table>
+
+<div th:replace="~{/commons/footer :: footer}"></div>
+<div th:replace="~{/commons/script :: script}"></div>
 </body>
 </html>

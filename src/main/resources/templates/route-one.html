@@ -2,34 +2,42 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>View Route</title>
-    <meta charset="UTF-8">
+    <head th:replace="~{/commons/head :: head}"></head>
 </head>
+
 <body>
-<h1>Route Details</h1>
+<div th:replace="~{/commons/topbar :: topbar}"></div>
+<div th:replace="~{/commons/navbar :: navbar}"></div>
+<div th:replace="~{/commons/head :: page('Route details')}"></div>
+
+
 <h3 th:if="${message!=null}" th:text="${message}">Message</h3>
 <table>
-        <tr>
+    <tr>
         <th>parcel:</th>
-                <td th:text="${entity.parcel}"></td>
-            </tr>
-        <tr>
+        <td th:text="${entity.parcel}"></td>
+    </tr>
+    <tr>
         <th>locations:</th>
-                <td th:text="${entity.locations}"></td>
-            </tr>
-        <tr>
+        <td th:text="${entity.locations}"></td>
+    </tr>
+    <tr>
         <th>dateTime:</th>
-                <td th:text="${entity.dateTime}"></td>
-            </tr>
-    
+        <td th:text="${entity.dateTime}"></td>
+    </tr>
+
 
 </table>
 <br>
 <a th:href="@{/route}">Back to the List</a>
 <a th:href="@{/route/edit/{id}(id=${entity.id})}">Edit</a>
 <form th:if="${entity.id!=null}" method="get"
-         th:action="'/route/'
+      th:action="'/route/'
                + ${entity.id} + '/delete'">
     <input type="submit" value="Delete" onclick="return confirm('Are you sure?')">
 </form>
+
+<div th:replace="~{/commons/footer :: footer}"></div>
+<div th:replace="~{/commons/script :: script}"></div>
 </body>
 </html>

@@ -2,10 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>List of Role</title>
-    <meta charset="UTF-8">
+    <head th:replace="~{/commons/head :: head}"></head>
 </head>
+
 <body>
-<h1>List of Role</h1>
+<div th:replace="~{/commons/topbar :: topbar}"></div>
+<div th:replace="~{/commons/navbar :: navbar}"></div>
+<div th:replace="~{/commons/head :: page('Roles')}"></div>
+
+
 <h3 th:if="${message != null}" th:text="${message}">Message</h3>
 <a th:href="@{/role/edit}">Create new Role</a>
 <table>
@@ -17,9 +22,9 @@
     </tr>
     </thead>
     <tbody>
-        <tr th:each="entity : ${list}">
-                                    <td th:text=${entity.name}></td>
-                
+    <tr th:each="entity : ${list}">
+        <td th:text=${entity.name}></td>
+
         <td>
             <a th:href="@{/role/{id}(id=${entity.id})}">See detail</a>
             <a th:href="@{/role/edit/{id}(id=${entity.id})}">Edit</a>
@@ -32,5 +37,8 @@
     </tr>
     </tbody>
 </table>
+
+<div th:replace="~{/commons/footer :: footer}"></div>
+<div th:replace="~{/commons/script :: script}"></div>
 </body>
 </html>

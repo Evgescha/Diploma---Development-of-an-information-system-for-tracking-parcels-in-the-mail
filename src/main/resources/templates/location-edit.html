@@ -3,34 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Location</title>
+    <head th:replace="~{/commons/head :: head}"></head>
 </head>
+
 <body>
-<h1>Edit Location</h1>
+<div th:replace="~{/commons/topbar :: topbar}"></div>
+<div th:replace="~{/commons/navbar :: navbar}"></div>
+<div th:replace="~{/commons/head :: page('Edit location')}"></div>
+
+
 <h3 th:if="${message != null}" th:text="${message}">Message</h3>
 <form th:action="@{/location}" th:object="${entity}" method="post">
 
     <p>
         <label for="address">address:</label>
-            <input type="text" th:field="*{address}" id="address" required>
-        </p>
+        <input type="text" th:field="*{address}" id="address" required>
+    </p>
     <p>
         <label for="latitude">latitude:</label>
-            <input type="text" th:field="*{latitude}" id="latitude" required>
-        </p>
+        <input type="text" th:field="*{latitude}" id="latitude" required>
+    </p>
     <p>
         <label for="longitude">longitude:</label>
-            <input type="text" th:field="*{longitude}" id="longitude" required>
-        </p>
+        <input type="text" th:field="*{longitude}" id="longitude" required>
+    </p>
     <p>
         <label for="contactInfo">contactInfo:</label>
-            <input type="text" th:field="*{contactInfo}" id="contactInfo" required>
-        </p>
+        <input type="text" th:field="*{contactInfo}" id="contactInfo" required>
+    </p>
     <p>
         <label for="users">users:</label>
-            <select multiple="multiple" th:field="*{users}" id="users">
+        <select multiple="multiple" th:field="*{users}" id="users">
             <option th:each="users_item : ${users_list}" th:value="${users_item}" th:text="${users_item}"></option>
         </select>
-        </p>
+    </p>
 
     <p>
         <input type="text" th:field="*{id}" id="id">
@@ -38,6 +44,9 @@
         <a th:href="@{/location}">Cancel</a>
     </p>
 </form>
+
+<div th:replace="~{/commons/footer :: footer}"></div>
+<div th:replace="~{/commons/script :: script}"></div>
 
 </body>
 </html>

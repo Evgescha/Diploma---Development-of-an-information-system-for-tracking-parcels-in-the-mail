@@ -2,46 +2,54 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>View Location</title>
-    <meta charset="UTF-8">
+    <head th:replace="~{/commons/head :: head}"></head>
 </head>
+
 <body>
-<h1>Location Details</h1>
+<div th:replace="~{/commons/topbar :: topbar}"></div>
+<div th:replace="~{/commons/navbar :: navbar}"></div>
+<div th:replace="~{/commons/head :: page('Location details')}"></div>
+
+
 <h3 th:if="${message!=null}" th:text="${message}">Message</h3>
 <table>
-        <tr>
+    <tr>
         <th>address:</th>
-                <td th:text="${entity.address}"></td>
-            </tr>
-        <tr>
+        <td th:text="${entity.address}"></td>
+    </tr>
+    <tr>
         <th>latitude:</th>
-                <td th:text="${entity.latitude}"></td>
-            </tr>
-        <tr>
+        <td th:text="${entity.latitude}"></td>
+    </tr>
+    <tr>
         <th>longitude:</th>
-                <td th:text="${entity.longitude}"></td>
-            </tr>
-        <tr>
+        <td th:text="${entity.longitude}"></td>
+    </tr>
+    <tr>
         <th>contactInfo:</th>
-                <td th:text="${entity.contactInfo}"></td>
-            </tr>
-        <tr>
+        <td th:text="${entity.contactInfo}"></td>
+    </tr>
+    <tr>
         <th>users:</th>
-                <td>
+        <td>
             <ul>
                 <li th:each="users_item : ${entity.users}" th:text="${users_item}"></li>
             </ul>
         </td>
-            </tr>
-    
+    </tr>
+
 
 </table>
 <br>
 <a th:href="@{/location}">Back to the List</a>
 <a th:href="@{/location/edit/{id}(id=${entity.id})}">Edit</a>
 <form th:if="${entity.id!=null}" method="get"
-         th:action="'/location/'
+      th:action="'/location/'
                + ${entity.id} + '/delete'">
     <input type="submit" value="Delete" onclick="return confirm('Are you sure?')">
 </form>
+
+<div th:replace="~{/commons/footer :: footer}"></div>
+<div th:replace="~{/commons/script :: script}"></div>
 </body>
 </html>
