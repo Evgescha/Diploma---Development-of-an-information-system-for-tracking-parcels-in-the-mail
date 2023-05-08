@@ -2,6 +2,7 @@ package com.hescha.mailtracking.controller;
 
 import com.hescha.mailtracking.model.Parcel;
 import com.hescha.mailtracking.model.ParcelStatus;
+import com.hescha.mailtracking.model.Route;
 import com.hescha.mailtracking.model.User;
 import com.hescha.mailtracking.service.ParcelService;
 import com.hescha.mailtracking.service.RouteService;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.stereotype.Controller;
+
+import java.util.List;
 
 
 @Controller
@@ -111,6 +114,29 @@ public class ParcelController {
     @GetMapping("/{id}/delete")
     public String delete(@PathVariable Long id, RedirectAttributes ra) {
         try {
+
+            Parcel read = service.read(id);
+            List<Route> routes = read.getRoutes();
+            User recipient = read.getRecipient();
+            User sender = read.getSender();
+
+            read.setRoutes(null);
+            read.setSender(null);
+            read.setRecipient(null);
+            for (Route route : routes) {
+                route.setParcel(null);
+                route.setLocations(null);
+                routeService.update(route);
+                routeService.delete(route.getId());
+            }
+
+
+            recipient.getReceivedParcel().remove(read);
+            sender.getSendedParcel().remove(read);
+
+
+            service.update(read);
+
             service.delete(id);
             ra.addFlashAttribute(MESSAGE, "Removing is successful");
         } catch (Exception e) {
