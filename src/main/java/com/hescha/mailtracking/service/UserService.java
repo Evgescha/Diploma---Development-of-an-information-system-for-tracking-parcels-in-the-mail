@@ -76,24 +76,12 @@ public class UserService extends CrudService<User>  implements org.springframewo
         return repository.findByPassportNumberContains(passportNumber);
     }
 
-    public List<User> findByPhoneNumber(String phoneNumber) {
-        return repository.findByPhoneNumber(phoneNumber);
-    }
-
-    public List<User> findByPhoneNumberContains(String phoneNumber) {
-        return repository.findByPhoneNumberContains(phoneNumber);
-    }
-
     public List<User> findByAddress(String address) {
         return repository.findByAddress(address);
     }
 
     public List<User> findByAddressContains(String address) {
         return repository.findByAddressContains(address);
-    }
-
-    public User findByLocation(Location location) {
-        return repository.findByLocation(location);
     }
 
     public List<User> findBySendedParcelContains(com.hescha.mailtracking.model.Parcel sendedParcel) {
@@ -103,7 +91,6 @@ public class UserService extends CrudService<User>  implements org.springframewo
     public List<User> findByReceivedParcelContains(com.hescha.mailtracking.model.Parcel receivedParcel) {
         return repository.findByReceivedParcelContains(receivedParcel);
     }
-
 
     public User update(Long id, User entity) {
         User read = read(id);
@@ -121,12 +108,8 @@ public class UserService extends CrudService<User>  implements org.springframewo
         read.setFirstname(entity.getFirstname());
         read.setLastname(entity.getLastname());
         read.setPassportNumber(entity.getPassportNumber());
-        read.setPhoneNumber(entity.getPhoneNumber());
         read.setAddress(entity.getAddress());
-        read.setLocation(entity.getLocation());
         read.setRoles(entity.getRoles());
-        read.setSendedParcel(entity.getSendedParcel());
-        read.setReceivedParcel(entity.getReceivedParcel());
     }
 
     public boolean registerNew(User entity) {

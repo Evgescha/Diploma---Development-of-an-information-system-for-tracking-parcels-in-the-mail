@@ -19,6 +19,4 @@ public interface LocationRepository extends JpaRepository<Location, Long> {
     List<Location> findByContactInfo(String contactInfo);
 
     List<Location> findByContactInfoContains(String contactInfo);
-
-    List<Location> findByUsersContains(com.hescha.mailtracking.model.User users);
 }

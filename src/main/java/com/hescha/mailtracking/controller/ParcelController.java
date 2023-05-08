@@ -1,9 +1,9 @@
 package com.hescha.mailtracking.controller;
 
 import com.hescha.mailtracking.model.Parcel;
+import com.hescha.mailtracking.model.ParcelStatus;
 import com.hescha.mailtracking.service.ParcelService;
 import com.hescha.mailtracking.service.RouteService;
-import com.hescha.mailtracking.service.TrackingStatusService;
 import com.hescha.mailtracking.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +31,6 @@ public class ParcelController {
     private final ParcelService service;
 
     private final UserService userService;
-    private final TrackingStatusService trackingStatusService;
     private final RouteService routeService;
 
     @GetMapping
@@ -55,7 +54,7 @@ public class ParcelController {
         }
 
         model.addAttribute("user_list", userService.readAll());
-        model.addAttribute("trackingStatus_list", trackingStatusService.readAll());
+        model.addAttribute("trackingStatus_list", ParcelStatus.values());
         model.addAttribute("route_list", routeService.readAll());
 
         return THYMELEAF_TEMPLATE_EDIT_PAGE;

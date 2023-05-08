@@ -33,30 +33,9 @@ public class ParcelService extends CrudService<Parcel> {
         return repository.findByCost(cost);
     }
 
-    public List<Parcel> findByDispatchDate(String dispatchDate) {
-        return repository.findByDispatchDate(dispatchDate);
-    }
-
-    public List<Parcel> findByDispatchDateContains(String dispatchDate) {
-        return repository.findByDispatchDateContains(dispatchDate);
-    }
-
-    public List<Parcel> findByDeliveryDate(String deliveryDate) {
-        return repository.findByDeliveryDate(deliveryDate);
-    }
-
-    public List<Parcel> findByDeliveryDateContains(String deliveryDate) {
-        return repository.findByDeliveryDateContains(deliveryDate);
-    }
-
-    public List<Parcel> findByTrackingStatusesContains(com.hescha.mailtracking.model.TrackingStatus trackingStatuses) {
-        return repository.findByTrackingStatusesContains(trackingStatuses);
-    }
-
     public List<Parcel> findByRoutesContains(com.hescha.mailtracking.model.Route routes) {
         return repository.findByRoutesContains(routes);
     }
-
 
     public Parcel update(Long id, Parcel entity) {
         Parcel read = read(id);
@@ -75,7 +54,7 @@ public class ParcelService extends CrudService<Parcel> {
         read.setCost(entity.getCost());
         read.setDispatchDate(entity.getDispatchDate());
         read.setDeliveryDate(entity.getDeliveryDate());
-        read.setTrackingStatuses(entity.getTrackingStatuses());
+        read.setStatus(entity.getStatus());
         read.setRoutes(entity.getRoutes());
     }
 }

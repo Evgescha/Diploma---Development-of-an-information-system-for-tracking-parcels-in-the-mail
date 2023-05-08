@@ -40,11 +40,6 @@ public class LocationService extends CrudService<Location> {
         return repository.findByContactInfoContains(contactInfo);
     }
 
-    public List<Location> findByUsersContains(com.hescha.mailtracking.model.User users) {
-        return repository.findByUsersContains(users);
-    }
-
-
     public Location update(Long id, Location entity) {
         Location read = read(id);
         if (read == null) {
@@ -52,7 +47,6 @@ public class LocationService extends CrudService<Location> {
         }
         updateFields(entity, read);
         return update(read);
-
     }
 
     private void updateFields(Location entity, Location read) {
@@ -60,6 +54,5 @@ public class LocationService extends CrudService<Location> {
         read.setLatitude(entity.getLatitude());
         read.setLongitude(entity.getLongitude());
         read.setContactInfo(entity.getContactInfo());
-        read.setUsers(entity.getUsers());
     }
 }

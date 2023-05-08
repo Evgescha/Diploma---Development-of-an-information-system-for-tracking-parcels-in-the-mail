@@ -14,6 +14,4 @@ public class Location extends AbstractEntity {
     private double latitude;
     private double longitude;
     private String contactInfo;
-    @OneToMany
-    private List<User> users = new ArrayList<>();
 }

@@ -20,6 +20,15 @@
                 <a href="/about" class="nav-item nav-link">About</a>
                 <a href="/service" class="nav-item nav-link">Service</a>
                 <a href="/contact" class="nav-item nav-link">Contact</a>
+
+                <a href="/user/profile" class="nav-item nav-link"
+                   th:if="${#request.userPrincipal != null and !#request.isUserInRole('ADMIN') }">Profile</a>
+                <a href="/user" class="nav-item nav-link"
+                   th:if="${#request.isUserInRole('ADMIN') }">Users</a>
+                <a href="/login" class="nav-item nav-link"
+                   th:if="${#request.userPrincipal == null}">Login</a>
+                <a href="/logout" class="nav-item nav-link"
+                   th:if="${#request.userPrincipal != null}">Logout</a>
             </div>
         </div>
     </nav>

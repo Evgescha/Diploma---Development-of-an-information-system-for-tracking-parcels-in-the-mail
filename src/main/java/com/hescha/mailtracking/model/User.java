@@ -21,10 +21,8 @@ public class User extends AbstractEntity {
     private String firstname;
     private String lastname;
     private String passportNumber;
-    private String phoneNumber;
+    private String image;
     private String address;
-    @ManyToOne
-    private Location location;
     @ManyToMany
     private Set<Role> roles = new HashSet<>();
     @OneToMany(mappedBy = "sender")

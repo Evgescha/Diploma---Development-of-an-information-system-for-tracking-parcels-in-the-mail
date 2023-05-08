@@ -17,15 +17,5 @@ public interface ParcelRepository extends JpaRepository<Parcel, Long> {
 
     Parcel findByCost(double cost);
 
-    List<Parcel> findByDispatchDate(String dispatchDate);
-
-    List<Parcel> findByDispatchDateContains(String dispatchDate);
-
-    List<Parcel> findByDeliveryDate(String deliveryDate);
-
-    List<Parcel> findByDeliveryDateContains(String deliveryDate);
-
-    List<Parcel> findByTrackingStatusesContains(com.hescha.mailtracking.model.TrackingStatus trackingStatuses);
-
     List<Parcel> findByRoutesContains(com.hescha.mailtracking.model.Route routes);
 }

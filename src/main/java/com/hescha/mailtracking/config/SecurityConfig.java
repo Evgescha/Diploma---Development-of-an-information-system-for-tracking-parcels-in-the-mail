@@ -51,18 +51,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/h2", "/h2/**", "/css/**", "/js/**", "/img/**", "/lib/**",
                         "/about","/contact","/service", "/single",
                         "/register", "/login").permitAll()
-                .antMatchers(HttpMethod.POST, "/search", "/register", "/login", "/contact").permitAll()
+                .antMatchers(HttpMethod.POST, "/registration", "/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/", true)
-                .failureForwardUrl("/login?error=true")
+                .failureUrl("/login?error=true")
                 .permitAll()
                 .and()
                 .logout()
-                .logoutUrl("/logout") // Добавьте эту строку кода
+                .logoutUrl("/logout")
                 .permitAll();
     }
 }

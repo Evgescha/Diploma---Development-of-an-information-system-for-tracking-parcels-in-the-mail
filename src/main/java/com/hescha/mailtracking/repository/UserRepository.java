@@ -30,15 +30,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findByPassportNumberContains(String passportNumber);
 
-    List<User> findByPhoneNumber(String phoneNumber);
-
-    List<User> findByPhoneNumberContains(String phoneNumber);
-
     List<User> findByAddress(String address);
 
     List<User> findByAddressContains(String address);
-
-    User findByLocation(Location location);
 
     List<User> findBySendedParcelContains(com.hescha.mailtracking.model.Parcel sendedParcel);
 
