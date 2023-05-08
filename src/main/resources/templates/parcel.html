@@ -27,7 +27,6 @@
                         <th>dispatchDate</th>
                         <th>deliveryDate</th>
                         <th>delivery address</th>
-                        <th>routes</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -40,11 +39,6 @@
                         <td th:text=${entity.dispatchDate}></td>
                         <td th:text=${entity.deliveryDate}></td>
                         <td th:text=${entity.recipient.address}></td>
-                        <td>
-                            <ul>
-                                <li th:each="routes_item : ${entity.routes}" th:text="${routes_item.locations}"></li>
-                            </ul>
-                        </td>
                         <td style="
                                 display: flex;
                                 flex-direction: column;

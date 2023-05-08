@@ -28,7 +28,7 @@
                     <tbody>
                     <tr th:each="entity : ${list}">
                         <td th:text=${entity.parcel}></td>
-                        <td th:text=${entity.locations}></td>
+                        <td th:text=${entity.locations.address}></td>
                         <td th:text=${entity.dateTime}></td>
                         <td style="
                                 display: flex;

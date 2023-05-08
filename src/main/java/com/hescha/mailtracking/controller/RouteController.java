@@ -1,6 +1,8 @@
 package com.hescha.mailtracking.controller;
 
+import com.hescha.mailtracking.model.Parcel;
 import com.hescha.mailtracking.model.Route;
+import com.hescha.mailtracking.model.User;
 import com.hescha.mailtracking.service.LocationService;
 import com.hescha.mailtracking.service.ParcelService;
 import com.hescha.mailtracking.service.RouteService;
@@ -63,6 +65,11 @@ public class RouteController {
         if (entity.getId() == null) {
             try {
                 Route createdEntity = service.create(entity);
+
+                Parcel newParcel = parcelService.read(entity.getParcel().getId());
+                newParcel.getRoutes().add(createdEntity);
+                parcelService.update(newParcel);
+
                 ra.addFlashAttribute(MESSAGE, "Creating is successful");
                 return REDIRECT_TO_ALL_ITEMS + "/" + createdEntity.getId();
             } catch (Exception e) {
@@ -72,7 +79,16 @@ public class RouteController {
             return REDIRECT_TO_ALL_ITEMS;
         } else {
             try {
-                service.update(entity.getId(), entity);
+                Route oldRoute = service.read(entity.getId());
+                Parcel oldParcel = parcelService.read(oldRoute.getParcel().getId());
+                oldParcel.getRoutes().remove(oldRoute);
+                parcelService.update(oldParcel);
+
+                Route updatedEntity = service.update(entity.getId(), entity);
+
+                Parcel newParcel = parcelService.read(entity.getParcel().getId());
+                newParcel.getRoutes().add(updatedEntity);
+                parcelService.update(newParcel);
                 ra.addFlashAttribute(MESSAGE, "Editing is successful");
             } catch (Exception e) {
                 e.printStackTrace();
