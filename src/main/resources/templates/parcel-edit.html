@@ -55,7 +55,7 @@
                         <div class="control-group" hidden>
                             <label for="routes" class="font-weight-bold">Routes:</label>
                             <select multiple="multiple" class="form-control border-0 p-4" th:field="*{routes}" id="routes">
-                                <option th:each="routes_item : ${entity.routes}" th:value="${routes_item}"
+                                <option th:each="routes_item : ${entity.routes}" th:value="${routes_item.id}"
                                         th:text="${routes_item}"></option>
                             </select>
                             <p class="help-block text-danger"></p>

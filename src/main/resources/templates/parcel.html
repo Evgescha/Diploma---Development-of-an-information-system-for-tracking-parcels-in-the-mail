@@ -13,47 +13,78 @@
 
 <div class="container-fluid py-5">
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col">
-                <h3 th:if="${message != null}" th:text="${message}">Message</h3>
-                <a class="btn btn-primary mb-3" th:href="@{/parcel/edit}">Create new Parcel</a>
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>sender</th>
-                        <th>recipient</th>
-                        <th>weight</th>
-                        <th>cost</th>
-                        <th>dispatchDate</th>
-                        <th>deliveryDate</th>
-                        <th>delivery address</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="entity : ${list}">
-                        <td th:text=${entity.sender}></td>
-                        <td th:text=${entity.recipient}></td>
-                        <td th:text=${entity.weight}></td>
-                        <td th:text=${entity.cost}></td>
-                        <td th:text=${entity.dispatchDate}></td>
-                        <td th:text=${entity.deliveryDate}></td>
-                        <td th:text=${entity.recipient.address}></td>
-                        <td style="
+
+        <div class="row align-items-center mt-5">
+            <div class="col-12">
+                <h3>Sent parcels</h3>
+                <ul class="nav nav-pills mb-3" id="ordersTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="CREATED-tab" data-bs-toggle="pill" href="#CREATED" role="tab"
+                           aria-controls="CREATED" aria-selected="true">CREATED</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="APPROVED-tab" data-bs-toggle="pill" href="#APPROVED" role="tab"
+                           aria-controls="APPROVED" aria-selected="false">APPROVED</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="MOVED_TO_LOCATION-tab" data-bs-toggle="pill" href="#MOVED_TO_LOCATION" role="tab"
+                           aria-controls="MOVED_TO_LOCATION" aria-selected="false">MOVED_TO_LOCATION</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="DELIVERED-tab" data-bs-toggle="pill" href="#DELIVERED" role="tab"
+                           aria-controls="DELIVERED" aria-selected="false">DELIVERED</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="REJECTED-tab" data-bs-toggle="pill" href="#REJECTED" role="tab"
+                           aria-controls="REJECTED" aria-selected="false">REJECTED</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="ordersTabContent">
+                    <div th:each="status : ${T(com.hescha.mailtracking.model.ParcelStatus).values()}"
+                         th:id="${status}"
+                         th:classappend="${status == T(com.hescha.mailtracking.model.ParcelStatus).CREATED} ? 'active '"
+                         class="tab-pane" role="tabpanel" aria-labelledby="${status}-tab">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Parcel ID</th>
+                                <th>Sender</th>
+                                <th>recipient</th>
+                                <th>Weight</th>
+                                <th>Cost</th>
+                                <th>Dispatch Date</th>
+                                <th>Delivery Date</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="item : ${list}" th:if="${item.status == status}">
+                                <td th:text="${item.id}"></td>
+                                <td th:text="${item.sender}"></td>
+                                <td th:text="${item.recipient}"></td>
+                                <td th:text="${item.weight}"></td>
+                                <td th:text="${item.cost}"></td>
+                                <td th:text="${item.dispatchDate}"></td>
+                                <td th:text="${item.deliveryDate}"></td>
+                                <td th:text="${item.status}"></td>
+
+                                <td style="
                                 display: flex;
                                 flex-direction: column;
                                 justify-content: center;
                                 align-items: center;
                             ">
-                            <a class="btn btn-secondary btn-sm" th:href="@{/parcel/{id}(id=${entity.id})}">See detail</a>
-                            <a class="btn btn-primary btn-sm" th:href="@{/parcel/edit/{id}(id=${entity.id})}">Edit</a>
-                            <form th:if="${entity.id!=null}" method="get" th:action="'/parcel/' +${entity.id}+'/delete'" class="d-inline">
-                                <input class="btn btn-danger btn-sm" type="submit" value="Delete" onclick="return confirm('Are you sure?')">
-                            </form>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                                    <a class="btn btn-secondary btn-sm" th:href="@{/parcel/{id}(id=${item.id})}">See detail</a>
+                                    <a class="btn btn-primary btn-sm" th:href="@{/parcel/edit/{id}(id=${item.id})}">Edit</a>
+                                    <form th:if="${item.id!=null}" method="get" th:action="'/parcel/' +${item.id}+'/delete'" class="d-inline">
+                                        <input class="btn btn-danger btn-sm" type="submit" value="Delete" onclick="return confirm('Are you sure?')">
+                                    </form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

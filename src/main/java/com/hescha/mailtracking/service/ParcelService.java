@@ -55,6 +55,5 @@ public class ParcelService extends CrudService<Parcel> {
         read.setDispatchDate(entity.getDispatchDate());
         read.setDeliveryDate(entity.getDeliveryDate());
         read.setStatus(entity.getStatus());
-        read.setRoutes(entity.getRoutes());
     }
 }
