@@ -19,7 +19,7 @@
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>username</th>
+                        <th>id</th>
                         <th>firstname</th>
                         <th>lastname</th>
                         <th>passportNumber</th>
@@ -30,6 +30,7 @@
                     </thead>
                     <tbody>
                     <tr th:each="entity : ${list}">
+                        <td th:text=${entity.id}></td>
                         <td th:text=${entity.username}></td>
                         <td th:text=${entity.firstname}></td>
                         <td th:text=${entity.lastname}></td>

@@ -1,11 +1,11 @@
 MERGE INTO role (id, name)
     KEY (id)
-    VALUES (1, 'USER');
+    VALUES (1, 'ROLE_USER');
 
 MERGE INTO role (id, name)
     KEY (id)
-    VALUES (2, 'MANAGER');
+    VALUES (2, 'ROLE_MANAGER');
 
 MERGE INTO role (id, name)
     KEY (id)
-    VALUES (3, 'ADMIN');
+    VALUES (3, 'ROLE_ADMIN');

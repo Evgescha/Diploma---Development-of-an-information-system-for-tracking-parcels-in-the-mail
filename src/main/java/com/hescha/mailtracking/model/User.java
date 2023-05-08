@@ -3,6 +3,7 @@ package com.hescha.mailtracking.model;
 import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -23,7 +24,7 @@ public class User extends AbstractEntity {
     private String passportNumber;
     private String image;
     private String address;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>();
     @OneToMany(mappedBy = "sender")
     private List<Parcel> sendedParcel = new ArrayList<>();

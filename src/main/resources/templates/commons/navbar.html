@@ -33,7 +33,7 @@
                 >Parcels</a>
 
                 <a href="/user" class="nav-item nav-link"
-                   th:if="${#request.isUserInRole('ADMIN') or #request.isUserInRole('ADMIN')}"
+                   th:if="${#request.isUserInRole('ADMIN') or #request.isUserInRole('MANAGER')}"
                 >Users</a>
 
                 <a href="/login" class="nav-item nav-link"
