@@ -122,12 +122,10 @@ public class ParcelController {
     @GetMapping("/{id}/delete")
     public String delete(@PathVariable Long id, RedirectAttributes ra) {
         try {
-
             Parcel read = service.read(id);
             List<Route> routes = read.getRoutes();
             User recipient = read.getRecipient();
             User sender = read.getSender();
-
             read.setRoutes(null);
             read.setSender(null);
             read.setRecipient(null);
@@ -137,14 +135,9 @@ public class ParcelController {
                 routeService.update(route);
                 routeService.delete(route.getId());
             }
-
-
             recipient.getReceivedParcel().remove(read);
             sender.getSendedParcel().remove(read);
-
-
             service.update(read);
-
             service.delete(id);
             ra.addFlashAttribute(MESSAGE, "Removing is successful");
         } catch (Exception e) {
