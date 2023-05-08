@@ -41,7 +41,9 @@
                         <td th:text="${entity.address}"></td>
                     </tr>
                 </table>
-                <a class="btn btn-primary" th:href="@{/user/edit/{id}(id=${entity.id})}">Edit Profile</a>
+                <a class="btn btn-primary"
+                   th:if="${#request.getUserPrincipal().getName().equals(entity.username)  or #request.isUserInRole('ADMIN') or #request.isUserInRole('MANAGER')}"
+                   th:href="@{/user/edit/{id}(id=${entity.id})}">Edit Profile</a>
             </div>
             <div class="col-md-4">
                 <img th:src="${entity.image}" alt="Profile Image" class="img-fluid" style="width: 100%">
@@ -87,7 +89,6 @@
                                 <th>Cost</th>
                                 <th>Dispatch Date</th>
                                 <th>Delivery Date</th>
-                                <th>Status</th>
                                 <th>Routes</th>
                             </tr>
                             </thead>
@@ -101,15 +102,8 @@
                                 <td th:text="${item.deliveryDate}"></td>
                                 <td th:text="${item.status}"></td>
                                 <td>
-                                    <ul>
-                                        <li th:each="routes_item : ${item.routes}" th:text="${routes_item.locations}"></li>
-                                    </ul>
-                                </td>
-
-                                <td>
-                                    <a th:if="${status == T(com.hescha.mailtracking.model.ParcelStatus).CREATED}"
-                                       class="btn btn-danger" th:href="@{/item/{id}/delete(id=${item.id})}">Delete
-                                        Appointment</a>
+                                    <a
+                                       class="btn btn-primary" th:href="@{/parcel/{id}/(id=${item.id})}">Details</a>
                                 </td>
                             </tr>
                             </tbody>

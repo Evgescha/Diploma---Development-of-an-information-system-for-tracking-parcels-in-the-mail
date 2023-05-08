@@ -12,10 +12,14 @@
 
 <div class="container-fluid py-5">
     <div class="container">
-        <div class="row">
+        <div class="row text-center" th:if="${entity==null}">
+            <h4 class="text-center mx-center">The Parcel was not found. Please check your code and try again</h4>
+        </div>
+        <div class="row" th:if="${entity!=null}">
             <div class="col-md-8">
                 <h3>Parcel Information</h3>
-                <table class="table table-bordered">
+                <h3>The Parcel was not found. Please check your code and try again</h3>
+                <table class="table table-bordered" th:if="${entity!=null}">
                     <tr>
                         <th>Sender</th>
                         <td th:text="${entity.sender.fullName()}"></td>
@@ -45,11 +49,12 @@
                         <td th:text="${entity.status}"></td>
                     </tr>
                 </table>
-                <div class="d-flex">
+                <div class="d-flex" th:if="${#request.isUserInRole('ADMIN') or #request.isUserInRole('MANAGER')}">
                     <a class="btn btn-primary" th:href="@{/parcel/edit/{id}(id=${entity.id})}">Edit Parcel</a>
                     <form th:if="${entity.id!=null}" method="get" th:action="'/parcel/' + ${entity.id} + '/delete'">
                         <input type="submit" class="btn btn-primary" value="Delete" onclick="return confirm('Are you sure?')">
                     </form>
+                    <a class="btn btn-primary" th:href="@{/route/add/{id}(id=${entity.id})}">Add new route</a>
                 </div>
             </div>
             <div class="col-md-4">
@@ -59,6 +64,19 @@
                         <strong th:text="${route.locations.address}"></strong>
                         <br/>
                         <small th:text="${route.dateTime}"></small>
+                        <td style="
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;
+                            "
+                            th:if="${#request.isUserInRole('ADMIN') or #request.isUserInRole('MANAGER')}"
+                        >
+                            <a class="btn btn-primary btn-sm" th:href="@{/route/edit/{id}(id=${entity.id})}">Edit</a>
+                            <form th:if="${entity.id!=null}" method="get" th:action="'/route/' +${entity.id}+'/delete'" class="d-inline">
+                                <input class="btn btn-danger btn-sm" type="submit" value="Delete" onclick="return confirm('Are you sure?')">
+                            </form>
+                        </td>
                     </li>
                 </ul>
             </div>

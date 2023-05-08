@@ -60,6 +60,15 @@ public class RouteController {
         return THYMELEAF_TEMPLATE_EDIT_PAGE;
     }
 
+    @GetMapping("/add/{id}")
+    public String addRouteToParcel(Model model, @PathVariable(name = "id", required = false) Long id) {
+        model.addAttribute("entity", new Route());
+        model.addAttribute("parcels", parcelService.read(id));
+        model.addAttribute("locations", locationService.readAll());
+
+        return THYMELEAF_TEMPLATE_EDIT_PAGE;
+    }
+
     @PostMapping
     public String save(@ModelAttribute Route entity, RedirectAttributes ra) {
         if (entity.getId() == null) {

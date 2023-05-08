@@ -15,6 +15,7 @@
     <div class="container">
 
         <h3 th:if="${message != null}" th:text="${message}">Message</h3>
+        <a class="btn btn-primary mb-3" th:href="@{/parcel/edit}">Create new Parcel</a>
         <div class="row align-items-center mt-5">
             <div class="col-12">
                 <h3>Sent parcels</h3>

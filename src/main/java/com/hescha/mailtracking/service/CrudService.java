@@ -16,7 +16,7 @@ public abstract class CrudService<Entity extends AbstractEntity> {
     }
 
     public Entity read(long id) {
-        return repository.findById(id).get();
+        return repository.findById(id).orElse(null);
     }
 
     public List<Entity> readAll() {

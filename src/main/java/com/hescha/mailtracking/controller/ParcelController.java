@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.stereotype.Controller;
 
@@ -46,6 +47,13 @@ public class ParcelController {
     @GetMapping("/{id}")
     public String read(@PathVariable("id") Long id, Model model) {
         model.addAttribute("entity", service.read(id));
+        return THYMELEAF_TEMPLATE_ONE_ITEM_PAGE;
+    }
+
+    @GetMapping("/search")
+    public String search(@RequestParam("id") Long id, Model model) {
+        Parcel read = service.read(id);
+        model.addAttribute("entity", read);
         return THYMELEAF_TEMPLATE_ONE_ITEM_PAGE;
     }
 
